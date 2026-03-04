@@ -1,0 +1,29 @@
+n_tasks = 10; % The number of tasks
+duration = [10,10,25,25,10,20,15,20,10,20];% The task durations
+
+n_res = 3; % The number of resources
+l = [4, 4, 4]; % Resource capacities 
+
+req = %Resource requirements of tasks
+      [| 0, 0, 0, 0, 0, 3, 0, 2, 1, 2 
+       | 0, 3, 0, 0, 0, 2, 2, 0, 1, 0
+       | 0, 0, 2, 2, 1, 0, 0, 0, 0, 2 |];
+       
+p = 14; % The number of precedence relations
+pre =   % The precedence relations
+  [| 1, 2
+   | 1, 6
+   | 1, 7
+   | 1, 9
+   | 2, 4 
+   | 2, 3
+   | 4, 5
+   | 3, 5
+   | 6, 8
+   | 7, 8 
+   | 7, 10
+   | 9, 10 
+   | 8, 4
+   | 10, 3|];
+
+       
