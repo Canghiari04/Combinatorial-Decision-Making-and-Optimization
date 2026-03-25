@@ -1,0 +1,12 @@
+A formal definition of any \textbf{Constraint Satisfaction Problem} (\textit{CSP}) can be described as follows.
+\begin{definition}
+    A CSP is a triple $\langle \textbf{X, D, C} \rangle$ where:
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item \textbf{X} is a set of decision variables $\{X_1, \dots, X_n\}$, which we have to associate a value.
+        \item \textbf{D} is a set of domains $\{D_1, \dots, D_n\}$, where $D_i$ is the domain of the decision variable $X_i$ with $i \in \{1, \dots, n\}$.
+        \item \textbf{C} is a set of constraints $\{C_1, \dots, C_m\}$. Every constraint $C_i$ with $i \in \{1, \dots, m\}$ is a mathematical relation over a subset of variables $\{X_j, \dots, X_k\}$, denoted as $C_i\{X_j, \dots, X_k\}$. Being a relation means a subset of the cartesian product of all the domains of the decision variables.
+    \end{itemize}
+\end{definition}
+Any CSP would be described by this triple $\langle X, D, C\rangle$. A \textbf{solution} of a Constraint Satisfaction Problem is an assignment of values to the 
+decision variables which satisfies all the constraints at the same time.

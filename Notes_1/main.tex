@@ -1,0 +1,189 @@
+\documentclass[12pt,a4paper,twoside]{book}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage[a4paper,inner=3.5cm,outer=2.5cm]{geometry}
+\usepackage{parskip}
+\usepackage{indentfirst}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multirow}
+
+\usepackage{natbib}
+\bibliographystyle{ieeetr}
+\setcitestyle{super,open={[},close={]}}
+
+\usepackage{hyperref}
+
+\usepackage{amsmath}
+\usepackage{bm}
+
+\usepackage[titletoc,title,toc,page]{appendix}
+\usepackage{chngcntr}
+\counterwithin{table}{chapter}
+\usepackage[capitalize,noabbrev]{cleveref}
+
+\usepackage{newlfont}
+\usepackage{fancyhdr}
+\usepackage{soul}
+\usepackage{xcolor}
+\usepackage{hyphenat}
+\hyphenation{mate-mati-ca recu-perare}
+
+\usepackage{listings}
+\usepackage{verbatim}
+
+\usepackage{tikz}
+\usepackage{lscape}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+
+\usepackage{enumitem}
+\setlist[itemize]{noitemsep, topsep=0pt}
+\setlist[enumerate]{noitemsep, topsep=0pt}
+
+\usepackage{amssymb}
+
+\usepackage[font=footnotesize,labelfont=bf]{caption}
+
+\newcommand{\rom}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+\usepackage{pdfpages}
+
+\lstset{
+  aboveskip=1em,
+  breaklines=true,
+  captionpos=b,
+  escapeinside={\%*}{*)},
+  frame=single,
+  numbers=left,
+  numbersep=15pt,
+  numberstyle=\tiny,
+  basicstyle=\ttfamily\footnotesize
+}
+
+\definecolor{maroon}{cmyk}{0, 0.87, 0.68, 0.32}
+\definecolor{halfgray}{gray}{0.55}
+\definecolor{ipython_frame}{RGB}{207, 207, 207}
+\definecolor{ipython_bg}{RGB}{247, 247, 247}
+\definecolor{ipython_red}{RGB}{186, 33, 33}
+\definecolor{ipython_green}{RGB}{0, 128, 0}
+\definecolor{ipython_cyan}{RGB}{64, 128, 128}
+\definecolor{ipython_purple}{RGB}{170, 34, 255}
+\definecolor{outputcellbg}{RGB}{248,248,248}
+
+\newtcolorbox{definition}[1][]{
+    enhanced,
+    breakable,
+    colback=white,
+    colframe=maroon,
+    arc=2pt,
+    boxrule=0.8pt,
+    left=10pt,
+    right=10pt,
+    top=8pt,
+    bottom=8pt,
+    fonttitle=\bfseries,
+    coltitle=white,
+    title=Definition,
+    #1
+}
+
+\newtcolorbox{example}[1][]{
+    enhanced,
+    breakable,
+    colback=white,
+    colframe=gray,
+    arc=2pt,
+    boxrule=0.8pt,
+    left=10pt,
+    right=10pt,
+    top=8pt,
+    bottom=8pt,
+    fonttitle=\bfseries,
+    coltitle=white,
+    title=Example,
+    #1
+}
+
+\begin{document}
+\pagestyle{empty}
+\newgeometry{left=2cm, right=2cm}
+\begin{titlepage}
+\begin{center}
+    {{\Large{\textsc{Alma Mater Studiorum $\cdot$ Università di Bologna}}}}
+    \rule[0.1cm]{\textwidth}{0.1mm}
+    \rule[0.5cm]{\textwidth}{0.6mm}\\
+    {\small{\bf Second Cycle Degree\\
+    Artificial Intelligence}}
+\end{center}
+
+\vspace{45mm}
+
+\begin{center}
+    \textbf{Combinatorial \\ Decision Making and Optimization}
+\end{center}
+
+\vspace{60mm}
+\par
+\noindent
+\begin{minipage}[t]{0.04\textwidth}
+~
+\end{minipage}
+\begin{minipage}[t]{0.4\textwidth}
+{{\textbf{Student:}\\
+Matteo Canghiari}}
+\end{minipage}
+\begin{minipage}[t]{0.04\textwidth}
+~
+\end{minipage}
+
+\vspace{30mm}
+
+\begin{center}
+    {\large{\bf Academic Year 2025/2026}}
+\end{center}
+\end{titlepage}
+
+\restoregeometry
+
+\pagestyle{empty}
+\newpage~\newpage
+\thispagestyle{empty}
+
+\clearpage
+\pagenumbering{arabic}
+\pagestyle{plain}
+
+\chapter{Introduction}
+\input{sections/1.tex}
+\label{c_1}
+
+\chapter{Modelling in CP}
+\input{sections/2.tex}
+\label{c_2}
+
+\section{Formalization as a Constraint Satisfaction Problem (CSP)}
+\input{sections/2_1.tex}
+\label{s_2_1}
+
+\section{Constraint Optimization Problem}
+\input{sections/2_2.tex}
+\label{s_2_2}
+
+\section{Task scheduling}
+\input{sections/2_3.tex}
+\label{s_2_3}
+
+\section{Constraints}
+\input{sections/2_4.tex}
+\label{s_2_4}
+\end{document}
