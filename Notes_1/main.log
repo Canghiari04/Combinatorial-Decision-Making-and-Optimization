@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.1.8)  25 MAR 2026 19:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.1.8)  27 MAR 2026 10:53
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -920,13 +920,13 @@ Overfull \hbox (18.94244pt too wide) in paragraph at lines 174--174
  []
 
 (./sections/2_1.tex) (./sections/2_2.tex [3]
-<img/img1.png, id=59, 332.24126pt x 333.245pt>
+<img/img1.png, id=83, 332.24126pt x 333.245pt>
 File: img/img1.png Graphic file (type png)
 <use img/img1.png>
 Package pdftex.def Info: img/img1.png  used on input line 17.
 (pdftex.def)             Requested size: 119.85146pt x 120.21217pt.
  [4 <./img/img1.png>]
-<img/img2.png, id=66, 382.42876pt x 385.44pt>
+<img/img2.png, id=90, 382.42876pt x 385.44pt>
 File: img/img2.png Graphic file (type png)
 <use img/img2.png>
 Package pdftex.def Info: img/img2.png  used on input line 50.
@@ -937,13 +937,13 @@ File: omscmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 65.
-<img/img3.png, id=67, 529.98pt x 247.92625pt>
+<img/img3.png, id=91, 529.98pt x 247.92625pt>
 File: img/img3.png Graphic file (type png)
 <use img/img3.png>
 Package pdftex.def Info: img/img3.png  used on input line 68.
 (pdftex.def)             Requested size: 239.70293pt x 112.13324pt.
  [5 <./img/img2.png>]
-<img/img4.png, id=77, 390.45876pt x 270.00874pt>
+<img/img4.png, id=101, 390.45876pt x 270.00874pt>
 File: img/img4.png Graphic file (type png)
 <use img/img4.png>
 Package pdftex.def Info: img/img4.png  used on input line 84.
@@ -953,7 +953,7 @@ Overfull \hbox (1.27573pt too wide) in paragraph at lines 1--11
 []\OT1/cmr/bx/n/12 Constraint Pro-gram-ming \OT1/cmr/m/n/12 is re-ally pow-er-ful when we have to deal within \OT1/cmr/bx/n/12 schedul-
  []
 
-<img/img5.png, id=84, 436.63126pt x 225.84375pt>
+<img/img5.png, id=108, 436.63126pt x 225.84375pt>
 File: img/img5.png Graphic file (type png)
 <use img/img5.png>
 Package pdftex.def Info: img/img5.png  used on input line 17.
@@ -964,27 +964,58 @@ Underfull \vbox (badness 1953) has occurred while \output is active []
  [7]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [8{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./img/img5.png>]) (./sections/2_4.tex) [9] (./main.aux)
+ [8{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./img/img5.png>]) (./sections/2_4.tex [9] [10]) (./sections/2_5.tex) (./sections/2_6.tex
+<img/img6.png, id=134, 883.3pt x 245.91875pt>
+File: img/img6.png Graphic file (type png)
+<use img/img6.png>
+Package pdftex.def Info: img/img6.png  used on input line 4.
+(pdftex.def)             Requested size: 279.64935pt x 77.85506pt.
+<img/img7.png, id=135, 484.81125pt x 242.9075pt>
+File: img/img7.png Graphic file (type png)
+<use img/img7.png>
+Package pdftex.def Info: img/img7.png  used on input line 15.
+(pdftex.def)             Requested size: 159.79788pt x 80.06334pt.
+ [11 <./img/img6.png>] [12 <./img/img7.png>]) (./sections/2_7.tex [13]) (./sections/2_8.tex [14]) (./sections/2_9.tex
+<img/img8.png, id=158, 589.20125pt x 304.13625pt>
+File: img/img8.png Graphic file (type png)
+<use img/img8.png>
+Package pdftex.def Info: img/img8.png  used on input line 13.
+(pdftex.def)             Requested size: 199.75041pt x 103.10794pt.
+ [15 <./img/img8.png>]) [16]
+Chapter 3.
+(./sections/3.tex) [17
+
+] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 191713125007521A94C5ABA26AD4391E;1041.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `main.out':
+(rerunfilecheck)             Before: 55952E5EB3574D32BDD2C6A34DD70E75;2169
+(rerunfilecheck)             After:  99CC41EB16DAB90651BCA50FA360C7E4;2184.
  ) 
 Here is how much of TeX's memory you used:
- 32713 strings out of 474222
- 631544 string characters out of 5748734
+ 32831 strings out of 474222
+ 633303 string characters out of 5748734
  1943975 words of memory out of 5000000
- 54399 multiletter control sequences out of 15000+600000
+ 54474 multiletter control sequences out of 15000+600000
  573626 words of font info for 94 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
  84i,7n,87p,590b,1027s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on main.pdf (11 pages, 219505 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on main.pdf (19 pages, 334544 bytes).
 PDF statistics:
- 155 PDF objects out of 1000 (max. 8388607)
- 110 compressed objects within 2 object streams
- 23 named destinations out of 1000 (max. 500000)
- 86 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 246 PDF objects out of 1000 (max. 8388607)
+ 183 compressed objects within 2 object streams
+ 48 named destinations out of 1000 (max. 500000)
+ 149 words of extra memory for PDF output out of 10000 (max. 10000000)
 

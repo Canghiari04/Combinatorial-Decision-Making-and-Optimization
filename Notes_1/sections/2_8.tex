@@ -1,0 +1,35 @@
+We need a way to reduce the set of solutions and consequently the huge search space from the symmetries. A general approach is to impose an \textbf{ordering}
+between the decision variables to avoid the permutations, in particular:
+$$ X_1 \leq X_2 \leq \dots \leq X_n \text{ when } [X_1, X_2, \dots, X_n] \text{ are all symmetric.} $$
+Notice, at least one solution from each set of symmetrically equivalent solutions must remain.
+\begin{example}[title = Improved model]
+    \textbf{Symmetry breaking constraints}.
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item $X_1 < X_2 < \dots < X_m$
+        \item $X_1 = 0$
+        \item $D_{12} < D_{(m-1)m}$
+    \end{itemize} \vspace{7pt}
+    Notice: symmetry breaking constraints and implied constraints are not the same thing. An implied constraint is a logical implication that does not change the solution at all, while a symmetry breaking constraint is not a logical implication, having it inside our model could change the state of the solution. \vspace{7pt}
+
+    \textbf{New objective}. 
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item $\textit{minimize}(X_m)$
+    \end{itemize}
+\end{example}
+At first sight, any global constraint seems to be a good constraint for our solver, like $\textit{alldifferent}(\dots)$ constraint. However, after we 
+introduced these symmetry breaking constraints, the $\textit{alldifferent}(\dots)$ constraint is not useful anymore, it becomes \textbf{semantically} and \textbf{computationally
+redundant}. Symmetry breaking constraints enable \textbf{constraint semplification}.
+\begin{example}[title = Simplified improved model]
+    \textbf{Symmetry breaking constraints}.
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item $X_1 < X_2 < \dots < X_m$ \\ $\textit{alldifferent}([X_1, X_2, \dots, X_m])$ constraint becomes redundant. In the process of remodelling, delete $\textit{alldifferent}([X_1, X_2, \dots, X_m])$ constraint can be a good idea to avoid redundancy. In addition, also the first constraint introduced in the previous section ($\textit{for all } i < j, \textit{ } D_{ij} = |X_i - X_j|$) can be simplified as follows:
+        \begin{itemize}
+            \renewcommand{\labelitemi}{-}
+            \item $\text{for all } i < j, \text{ } D_{ij} = X_i - X_j$
+        \end{itemize}
+        We don't need anymore absolute values, exploiting the decision variables order imposed by symmetry breaking constraints.
+    \end{itemize} \vspace{7pt}
+\end{example}

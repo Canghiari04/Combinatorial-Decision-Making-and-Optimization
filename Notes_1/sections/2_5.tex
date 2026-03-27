@@ -1,0 +1,10 @@
+Every choice done can affect our model, like:
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item \textbf{Choice of decision variables and their domains}. \\ The search space is defined as the product of all domains for each decision variable, in particular: \vspace{3.5pt}
+    \begin{center}
+        $|D(X_1)| \times |D(X_2)| \times \dots \times |D(X_n)|$
+    \end{center} \vspace{3.5pt}
+    Therefore, the search space could be \textbf{exponential} in size.
+    \item \textbf{Choice of constraints}. \\ Selecting the ideal constraints might be the essential key to solve our optimization problem. Propagating constraints the size of the search space can be reduced.
+\end{itemize}

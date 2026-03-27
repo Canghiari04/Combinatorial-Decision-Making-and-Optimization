@@ -1,1 +1,52 @@
-\dots
+Constraints fall into two broad categories:
+\begin{enumerate}
+    \item Most of them rely on declarative relations among objects. They describe an \textbf{intensional representation}, since we show the mathematical relationship in a \textbf{declarative} way of the constraint (\textit{e.g. $X > Y$}). 
+    \item Any constraint can be expressed by listing all the allowed combinations. This set of constraints follows exactly the mathematical relationship definition: any constraint can be seen as a subset of the cartesian product of all the domains. Generally, these constraints are named \textbf{extensional representation} or \textbf{table constraints} (\textit{e.g. $C(X_1, X_2) = \{(0,0), (0,2), (1,3, (2,1))\}$}).
+\end{enumerate}
+Additionally, constraints share the same features, in particular:
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item \textbf{Order does not matter}. \vspace{3.5pt}
+    \begin{center}
+        $X + Y \leq Z \text{ is the same as } Z \geq X + Y$
+    \end{center}
+    \item \textbf{Non-directional}. \\ A constraint between decision variables $X$ and $Y$ can be used to infer domain information on $Y$ given domain information on $X$ and vice versa.
+    \item \textbf{Rarely independent}. \\ Shared variables as communication mechanism between constraints. For instance, using the following relations $C_1 \rightarrow C_2 \rightarrow C_3$, we can exploit $C_2$ to infer something between $C_1$ and $C_3$. 
+\end{itemize}
+\begin{example}[title = Intensional constraints examples]
+    e.i. There are several constraints regarding intensional representation category. \vspace{7pt}
+
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item \textbf{Algebraic expressions}. 
+        \begin{itemize}
+            \item $X_1 > X_2$
+            \item $X_1 + X_2 = X_3$
+        \end{itemize} 
+        \item \textbf{Extensional constraints}. \vspace{1.5pt} 
+        \begin{center}
+            $(X, Y, Z) \text{ in } \{(1,3,5), (2,4,6), (3,5,4)\}$
+        \end{center}
+        \item \textbf{Logical relations}. \vspace{1.5pt} 
+        \begin{center}
+            $(X < Y) \vee (Y < Z) \rightarrow C$
+        \end{center}
+        \item \textbf{Global constraints}.
+        \begin{itemize}
+            \item $\textit{alldifferent}([X_1, X_2, X_3]) \text{ instead of: } \vspace{1.5pt} \\ X_1 \neq X_2, X_1 \neq X_3, X_2 \neq X_3$
+            \item $\textit{noOverlap}([Start_i, \dots, Start_n], [p_1, \dots, p_n]) \text{ instead of: } \vspace{1.5pt} \\ \text{for all } i < j \in \{1, \dots, n\}, (Start_i + p_i \leq Start_j) \vee (Start_j + p_j \leq Start_i)$
+        \end{itemize} \vspace{1.5pt}
+        Rule of thumb: if we have a relationship between all the decision variables, we always choose the \textbf{global constraint} instead of the hand-made one.
+        \item \textbf{Meta-constraints}. \\ A meta-constraint is a constraint inside an other constraint. \vspace{1.5pt} 
+        \begin{center}
+            $\sum_{i}(X_i > t_i) \leq 5$ \vspace{1.5pt}
+        \end{center} \vspace{1.5pt}
+        where:
+        \begin{itemize}
+            \renewcommand{\labelitemi}{}
+            \item $X_i \rightarrow$ decision variable
+            \item $t_i \rightarrow$ parameter
+        \end{itemize} \vspace{1.5pt}
+        We are simply counting how many decision variables satisfy the actual constraint. Roughly speaking, it's created a hidden boolean variable and any time $X_i > t_i$ the variable is set to $1$. We merge these boolean variables swearing that the decision variables are at most $5$.
+    \end{itemize}
+\end{example}

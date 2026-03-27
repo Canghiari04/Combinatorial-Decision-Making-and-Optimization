@@ -1,0 +1,18 @@
+The model designed could have \textbf{symmetry}: a state leading to a solution or a failure that have many symmetrically equivalent states. Symmetry 
+is divided into:
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item \textbf{Variable symmetry}. \\ A \textbf{permutation} $\pi$ of the \textbf{variable indeces} such that for each feasible or unfeasible assignment, we can rearrange the variables according to $\pi$ and obtain another feasible or unfeasible assignment.
+    \begin{example}[title = Variable symmetry in Golomb ruler problem]
+        e.g. Permuting variable assignments. 
+        $$ \langle X_1 = 0, X_2 = 1, X_3 = 4, X_4 = 6 \rangle $$
+        Starting from the above solution, we can define different ways to assign values or marks over the ruler, obtaining always the same conclusion. For any 
+        solution or failure composed by $m$ entities, we can derive $m!$ permutations. For instance, looking at the previous example we get $4 \times 3 \times 2 = 24$ same conclusions.
+    \end{example}
+    \item \textbf{Value symmetry}. \\ A \textbf{permutation} $\pi$ of the \textbf{values} such that for each feasible or unfeasible assignment, we can rearrange the values according to $\pi$ and obtain another feasible or unfeasible assignment.
+    \begin{example}[title = Value symmetry in Golomb ruler problem]
+        e.g. Values can be permuted as follows:
+        $$ \langle 0 \rightarrow 0, 1 \rightarrow 2, 2 \rightarrow 1, 3 \rightarrow 3, 4 \rightarrow 5, 5 \rightarrow 4, 6 \rightarrow 6 \rangle $$
+        Even for value permutations we get the same factorial complexity, $m!$ where $m$ is the number of values assigned.
+    \end{example}
+\end{itemize}
