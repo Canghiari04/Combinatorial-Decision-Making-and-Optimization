@@ -1,0 +1,95 @@
+When we are solving a complex Constraint Satisfaction Problem, constraints are rarely isolated. Because different constraints often share the same decision variables,
+a change in one variable's domain can trigger a chain reaction. As we already saw, any constraint has its own propagation algorithm and since they could have 
+\textit{shared resources} a given propagation algorithm can wake up an already propagated constraint to be repropagated again. \vspace{7pt}
+
+At the end, propagation reaches a \textbf{fixed point} and all constraints reach a level of consistency. The whole process described in few words before is called
+\textbf{constraint propagation}.
+\begin{example}
+    e.g. Constraint propagation.
+    $$
+        \begin{gathered}
+            D(X_1) = D(X_2) = D(X_3) = \{1, 2, 3\}, \\
+            C_1: \textit{alldifferent}([X_1, X_2, X_3]), C_2: X_2 < 3, C_3: X_3 < 3
+        \end{gathered}
+    $$
+    Assuming the order of propagation is $\langle C_1, C_2, C_3 \rangle$ and we would like to achieve GAC consistency, the propagation process goes as 
+    follows:
+    \begin{itemize}
+        \renewcommand{\labelitemi}{}
+        \item $1^{st}$ Propagation of $C_1$. 
+        \begin{itemize}
+            \item Nothing changes, $C_1$ is already in GAC. 
+        \end{itemize}
+        \item $2^{nd}$ Propagation of $C_2$. 
+        \begin{itemize}
+            \item $X_2 = 3$ is an inconsistent assignment, so we need to remove it from its domain $D(X_2) = \{1, 2, \bar{3}\}$.
+            \item Removing $3$ from the decision variable domain, $D(X_2) = \{1, 2\}$, $C_2$ is now in GAC.
+        \end{itemize}
+        \item $3^{rd}$ Propagation of $C_3$.
+        \begin{itemize}
+            \item $X_3 = 3$ is an inconsistent assignment, so we need to remove it from its domain $D(X_3) = \{1, 2, \bar{3}\}$.
+            \item Removing $3$ from the decision variable domain, $D(X_3) = \{1, 2\}$, $C_3$ is now in GAC.
+        \end{itemize}
+        \item $4^{th}$ Propagation of $C_1$. \\ $C_1$ is not in GAC anymore, since the supports of $\{1, 2\}$ values have been removed from the propagation of $C_2$ and $C_3$.
+        \begin{itemize}
+            \item $X_1 = 1$ and $X_1 = 2$ are inconsistent assignments, so we need to remove them from its domain $D(X_1) = \{1, \bar{2}, \bar{3}\}$. 
+            \item Removing $2$ and $3$ from the decision variable domain, $D(X_1) = \{3\}$, $C_1$ is again in GAC.
+        \end{itemize}
+    \end{itemize}
+\end{example}
+As we can state from the example above, sometimes it may not be enough to remove inconsistent values from domains once, some propagation algorithm can be re-triggered, starting again the whole propagation process. Anyway, a propagation algorithm \textbf{must wake up when necessary}, otherwise we may not achieve the 
+desired local consistency. \vspace{7pt}
+
+About the local consistencies seen so far, the following events may trigger their propagation algorithm:
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item GAC, when the domain of a variable changes.
+    \item BC, when the domain bounds of a variable changes.
+    \item Both of them, when a value is assigned to a decision variable.
+\end{itemize}
+\begin{example}
+    e.g. Constraint propagation.
+    $$
+        \begin{gathered}
+            D(X_1) = D(X_2) = D(X_3) = \{1, 2, 3\}, \\
+            C_1: \textit{alldifferent}([X_1, X_2, X_3]), C_2: X_2 \neq 2, C_3: X_3 \neq 2
+        \end{gathered}
+    $$
+    Assuming the order of propagation is $\langle C_1, C_2, C_3 \rangle$, where $C_1$ maintains $BC$ and $AC$ the others. The propagation process goes as follows:
+    \begin{itemize}
+        \renewcommand{\labelitemi}{}
+        \item $1^{st}$ Propagation of $C_1$. 
+        \begin{itemize}
+            \item Nothing changes, $C_1$ is already in BC. 
+        \end{itemize}
+        \item $2^{nd}$ Propagation of $C_2$. 
+        \begin{itemize}
+            \item $X_2 = 2$ is an inconsistent assignment, so we need to remove it from its domain $D(X_2) = \{1, \bar{2}, 3\}$.
+            \item Removing $2$ from the decision variable domain, $D(X_2) = \{1, 3\}$, $C_2$ is now in AC.
+        \end{itemize}
+        \item $3^{rd}$ Propagation of $C_3$.
+        \begin{itemize}
+            \item $X_3 = 2$ is an inconsistent assignment, so we need to remove it from its domain $D(X_3) = \{1, \bar{2}, 3\}$.
+            \item Removing $2$ from the decision variable domain, $D(X_3) = \{1, 3\}$, $C_3$ is now in AC.
+        \end{itemize}
+        \item $4^{th}$ Propagation of $C_1$. \\ There's no need to re-trigger $C_1$ constraint because it only maintains BC consistency. Since the changes done were limited to intermediate values and did not affect the domain bounds, the constraint remains consistent and it's not necessary to wake up it again.
+    \end{itemize}
+\end{example}
+How much expensive is a propagation algorithm? Assuming a Constraint Satisfaction Problem where all the decision variables have the same domain size,
+$|D(X_i)| = d, \forall i \in \{1, \dots, k\}$, achieving a local consistency by AC propagation for a whatever constraint $C(X_1, X_2)$ takes
+$O(d^2)$ time. It's not a good complexity, since in almost of the cases we have to check the domain of every variable. However, we can do better than this,
+using some tricks.
+\begin{example}
+    e.g. AC propagation tricks.
+    $$ C: X_1 = X_2 $$
+    The naive way would be: check if for every value of $X_1$ there is a support value in the domain of $X_2$. The same constraint can be expressed as follows:
+    $$ D(X_1) = D(X_2) = D(X_1) \cap D(X_2) $$
+    Therefore, the propagation algorithm should be activated when the \textbf{intersection} of the two domains changes.
+    $$ C: X_1 \neq X_2 $$
+    When the domain of a decision variable coincides with a single value, $D(X_i) = \{v\}$, we remove it from the domain of the second variable, $D(X_j) = 
+    \{\dots, \bar{v}, \dots\}$. Obviously, we don't remove it when both variables have multiple domains, because they can acquire different values.
+    $$ C: X_1 \leq X_2 $$
+    Without checking all the possible combinations of values, we can express the same relation in the following way:
+    $$ max(X_1) \leq max(X_2), min(X_1) \leq min(X_2) $$
+    If we can satisfy these conditions, we can state that our constraint is arc-consistent.
+\end{example}

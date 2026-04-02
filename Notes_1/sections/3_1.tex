@@ -1,0 +1,13 @@
+Before, we mentioned the term \textbf{consistency}, but, actually, what does consistency really mean?
+\begin{definition}[title = Local consistency]
+   Local consistency is a form of logical inference which detects \textbf{inconsistent partial assignments}.
+\end{definition}
+Before moving on, let's take a look at the previous definition, in particular we said about assigments:
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item \textbf{Partial}, since we assign gradually values to the decision variables.
+    \item \textbf{Inconsistent}, assignments that are not part of the final solution should be deleted.
+\end{itemize}
+In addition, we are dealing with a certain type of consistency, named \textbf{local consistency}: we examine only one constraint at time, we never take in account 
+more than one constraint. Typically solvers use local consistencies domain-based, they detect inconsistent partial assignments of the form $X_i = j$, removing 
+$j$ from the domain of $X_i$, so $j \in D(X_i)$, if this is the case.

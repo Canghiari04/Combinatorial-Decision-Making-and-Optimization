@@ -1,0 +1,71 @@
+\textbf{Bounds Consistency}, briefly \textbf{BC}, is a lower level of consistency than GAC or arc-consistency. Usually, it's used when all the domain values 
+are ordered, since it relaxes the domain of any decision variable $X_i$ from $D(X_i)$ to $[min(X_i), \dots, max(X_i)]$. So by relaxing we take in account 
+the whole interval, limited by the minimum and maximum values coming from the original domain.
+\begin{example}
+    e.g. Relaxing a decision variable domain. 
+    $$ D(X_i) = \{1, 3, 5\} \rightarrow [1\dots5] $$ 
+\end{example}
+In BC, we don't talk anymore about \textbf{support} but instead about \textbf{bound support}, since values don't come anymore from a precise domain but 
+from a more large range. 
+\begin{example}[title = Formal example]
+    Any constraint $C$ defined on $k$ decision variables, $C(X_1, \dots, X_k)$, gives us the following set of allowed combinations of values:
+    $$ C \subseteq D(X_1) \times \dots \times D(X_k) $$
+
+    Each allowed tuple $(d_1, \dots, d_k) \in C$ where $d_i \in [min(X_i), \dots, max(X_i)]$ is a \textbf{bound support} for $C$. \vspace{7pt}
+
+    Therefore, we say that the general constraint $C(X_1, \dots, X_k)$ is BC if and only if:
+    $$ \forall X_i \in \{X_1, \dots, X_k\}, min(X_i) \text{ and } max(X_i) \text{ belong to a bound support} $$
+\end{example}
+Previously, the GAC requirement was totally different, any value $v \in D(X_i)$ must belong to a whatever \textbf{support}, but now we care only about the
+\textbf{minimum} and the \textbf{maximum} values. By BC we make the search fastest than before, because we need to check only two values and not each of them. \vspace{7pt}
+
+However, everything comes with advantages and disadvantages, in particular:
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item \textbf{Disadvantage}.
+    \begin{enumerate}
+        \item BC might not detect all GAC inconsistencies. BC checks only the minimum and maximum values, between them might be different undected inconsistencies.
+    \end{enumerate}
+    \item \textbf{Advantages}.
+    \begin{enumerate}
+        \item Might be easier to look for a support in a range than in a domain, in particular when domains are very large.
+        \item Achieving BC is enough to achieve also GAC when we are dealing with \textbf{monotonic constraints}.
+        \item Achieving BC is often cheaper than achieving GAC.
+    \end{enumerate}
+\end{itemize}
+\begin{example}
+    e.g. Differences between GAC and BC regarding $\textit{alldifferent}(\dots)$ constraint.
+    $$ D(X_1) = D(X_2) = D(X_3) = \{1, 3\}, C:\textit{alldifferent}([X_1, X_2, X_3]) $$
+    It's quite easy to see that the constraint $C$ is unsatisfiable, the key distinction lies in when GAC and BC actually recognize this impossibility. \vspace{7pt}
+    
+    GAC would be perfectly aware that there are three different decision variables and only two available values in the domain and it will just fail.
+    BC won't see that, since it uses a range instead of the original domain, assuming also $2$ as available value for the future assignments. Anyway, also BC
+    will discover that this constraint is unfeasible, but this will occur later than by GAC. \vspace{7pt}
+
+    Technically, things go as follows:
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item $\text{BC}(C)$.
+        \begin{itemize}
+            \item All $min(X_i)$ and $max(X_i)$ belong to a bound support.
+            \item No domain reduction with BC propagation, since the tuple $d_i$ belongs to the bound support of $C$.
+        \end{itemize} 
+        \item $\text{GAC}(C)$.
+        \begin{itemize}
+            \item None of $min(X_i)$ and $max(X_i)$ belongs to a support. 
+            \item $C$ fails with GAC propagation.
+        \end{itemize} 
+    \end{itemize}
+\end{example}
+\begin{example}
+    e.g. Differences between GAC and BC regarding \textbf{monotonic constraint}. 
+    $$ D(X_1) = [2\dots6], D(X_2) = [1\dots5], C: X_1 \leq X_2 $$
+    In this example, GAC and BC will give the same reasoning, so we can summerize exactly the same behavior as follows:
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item All values $D(X_1)$ must be less or equal to $max(X_2)$.
+        \item All values of $D(X_2)$ must be greater or equal to $min(X_1)$.
+        \item It's enough to adjust the maximum value of $X_1$ and minimum value of $X_2$ to achieve consistency.
+    \end{itemize} \vspace{7pt}
+    After that, the final domains will be both $D(X_1) = D(X_2) = [2\dots5]$.
+\end{example}

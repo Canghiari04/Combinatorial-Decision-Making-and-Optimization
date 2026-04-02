@@ -1,0 +1,42 @@
+Applying constraint propagation, we can achieve local consistency of any constraint $C$ (\textit{examing only one constraint at time}). Therefore, \textbf{local consistency}
+can be seen as our target, while \textbf{constraint propagation} is the process to achieve this target. \vspace{7pt}
+
+The basic behavior of a constraint propagation algorithm consists in removing the inconsistent values from the decision variables domains involved in $C$.
+\begin{example}
+    e.g. Arc-consistency. 
+    $$ D(X_1) = \{1, 2, 3\}, D(X_2) = \{2, 3, 4\}, C: X_1 = X_2 $$
+
+    Is constraint $C$ arc-consistent? \vspace{7pt}
+
+    As before, we know that: 
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item $1 \in D(X_1)$ and $4 \in D(X_2)$ do not have a support respectively in $D(X_2)$ and $D(X_1)$.
+        \item $X_1 = 1$ and $X_2 = 4$ are inconsistent partial assignments, so they should be deleted from their domains. \vspace{7pt}
+    \end{itemize}
+    Deleting these values described above, we can reach arc-consistency for the constraint $C$:
+    $$ D(X_1) = \{\bar{1}, 2, 3\}, D(X_2) = \{2, 3, \bar{4}\} $$
+    The new domains for $X_1$ and $X_2$ will be both $D(X_1) = D(X_2) = \{2, 3\}$. Now constraint $C$ is \textbf{arc-consistent}.
+\end{example}
+\begin{example}
+    e.g. Generalised Arc Consistency. 
+    $$ D(X_1) = \{1, 2, 3\}, D(X_2) = \{1, 2\}, D(X_3) = \{1, 2\}, C:\textit{alldifferent}([X_1, X_2, X_3]) $$
+
+    Is constraint $C$ GAC? \vspace{7pt}
+
+    As before, we state that:
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item $1 \in D(X_1)$ and $2 \in D(X_1)$ do not have a support.
+        \item $X_1 = 1$ and $X_1 = 2$ are inconsistent partial assignments.
+    \end{itemize} \vspace{7pt}
+    We can remove these values from the domain of $X_1$ in order to achieve consistency, in particular:
+    $$ D(X_1) = \{\bar{1}, \bar{2}, 3\} $$
+    The new domain for the decision variable $X_1$ will be $D(X_1) = \{3\}$. Now constraint $C$ is \textbf{GAC}.
+\end{example}
+Furthermore, removing \textbf{incompatible values} from the domains of the decision variables is not only a way to achieve consistency but also a way to shrink
+the search space, improving the performance of our solver. \vspace{7pt}
+
+It doesn't exist only GAC or arc-consistency as local consistency: both of them has a very efficient propagation algorithm, but sometimes it might 
+be difficult to achieve this level of consistency or its computational complexity might be too huge, requiring a lot of time. In such cases, we have
+to focus on lower levels of consistency, detecting less incosistent values.

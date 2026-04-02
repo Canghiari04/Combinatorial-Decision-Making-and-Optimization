@@ -1,0 +1,125 @@
+We are gonna to examine the following global constraints:
+\begin{enumerate}
+    \item Counting
+    \item Sequencing 
+    \item Scheduling
+    \item Ordering
+\end{enumerate}
+$1^{st}$ \textbf{Counting constraint}. \\
+It restricts the number of variables satisfying a condition or the number of times values are taken. An example, that we already know it, is the $\textit{alldifferent(\dots)}$ constraint.
+\begin{definition}[title = $\textit{alldifferent(\dots)}$]
+    $$
+        \begin{gathered}
+            \textit{alldifferent}([X_1, \dots, X_k]) \text{ holds if and only if} \\
+            X_i \neq X_j \text{ for } i < j \in \{1, \dots, k\}
+        \end{gathered}
+    $$
+\end{definition} 
+In this global constraint, there is a hidden counting because we are observing how many times a value is assigned to a decision variable, that it can be at most 
+one single time. \vspace{7pt}
+
+Another counting constraint is the \textbf{global cardinality constraint}, briefly \textbf{gcc}. Gcc constrains the number of times each value is taken 
+by the variables, in particular:
+\begin{definition}[title = $\textit{gcc}(\dots)$]
+    $$
+        \begin{gathered}
+            \textit{gcc}([X_1, \dots, X_k], [v_1, \dots, v_m], [O_1, \dots, O_m]) \text{ holds if and only if } \\
+            \forall j \in \{1, \dots, m\} \text{ } O_j = |\{i | X_i = v_j, 1 \leq j \leq k\}|
+        \end{gathered}
+    $$
+    where:
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item $[X_1, \dots, X_k] \rightarrow$ decision variables
+        \item $[v_1, \dots, v_m] \rightarrow$ allowed values to assign
+        \item $[O_1, \dots, O_m] \rightarrow$ counters about how many times a value $v_j$ has been assigned
+    \end{itemize}
+\end{definition}
+$\textit{alldifferent}(\dots)$ constraint can be seen as a specific case of \textbf{gcc}, where counters $O_j$ must be equal to $1$. \vspace{7pt}
+
+A third counting constraint is the $\textit{among}(\dots)$ constraint. It constrains the number of variables taking certain values, in particular:
+\begin{definition}[title = $\textit{among}(\dots)$]
+    $$
+        \begin{gathered}
+            \textit{among}([X_1, \dots, X_k], s, l, u) \text{ holds if and only if } \\
+            l \leq |\{i | X_i \in s, 1 \leq k \leq k\}| \leq u
+        \end{gathered}
+    $$
+    where:
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item $s \rightarrow$ set of allowed values
+        \item $l \rightarrow$ lower bound
+        \item $u \rightarrow$ upper bound
+    \end{itemize}
+\end{definition}
+\begin{example}
+    $$ \textit{among}([1, 5, 3, 2, 5, 4], \{1, 2, 3, 4\}, 3, 4) $$
+    It states: only between $3$ and/or $4$ decision variables can take values in $\{1, 2, 3, 4\}$.
+\end{example}
+$2^{st}$ \textbf{Sequencing constraint}. \\
+It ensures a sequence of variables obey certain patterns. As before, we consider some examples about this family of constraint. \vspace{7pt}
+
+The $\textit{sequence}(\dots)$ constraint limits the number of values taken from a given set in any subsequence of $q$ variables, in particular:
+\begin{definition}[title = $\textit{sequence}(\dots)$]
+    $$
+        \begin{gathered}
+            \textit{sequence}(l, u, q, [X_1, \dots, X_k], s) \text{ holds if and only if } \\
+            \textit{among}([X_i, X_{i+1}, \dots, X_{i+q-1}], s, l, u) \text{ for } 1 \leq i \leq k - q + 1
+        \end{gathered}
+    $$
+    where:
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item $l \rightarrow$ lower bound
+        \item $u \rightarrow$ upper bound
+        \item $q \rightarrow$ number of decision variables inside the subsequence
+        \item $s \rightarrow$ set of allowed values
+    \end{itemize}
+\end{definition}
+\begin{example}
+    $$ \textit{sequence}(1, 2, 3, [1, 0, 2, 0, 3], \{0,1\}) $$
+    We are looking for a subsequence of three variables ($q = 3$) where at most one and/or two ($l = 1, u = 2$) of them can have values in $\{0, 1\}$.
+\end{example}
+$3^{rd}$ \textbf{Scheduling constraint}. \\ 
+It helps to schedule tasks with respective release times, duration, and deadlines, using limited resources in a time interval. \vspace{7pt}
+
+Sometimes we would like to design a scheduling problem, using a particular constraint named $\textit{disjunctive}(\dots)$. Our decision variables
+will be the starting time of any task, combining them such that they do not overlap in time. 
+\begin{definition}[title = $\textit{disjunctive}(\dots)$]
+    Given tasks $t_1, \dots, t_k$ each associated with a start time $S_i$ and duration $D_i$, the $\textit{disjunctive}(\dots)$ constraint is defined as follows:
+    $$
+        \begin{gathered}
+            \textit{disjunctive}([S_1, \dots, S_k], [D_1, \dots, D_k]) \text{ holds if and only if } \\
+            \forall i < j \text{ } (S_i + D_i \leq S_j) \vee (S_j + D_j \leq S_i)
+        \end{gathered}
+    $$
+\end{definition}
+This constraint is very useful when a resource can execute at most one task at time: it ensures that there's only one task running on it. \vspace{7pt}
+
+Sometimes we have the other way round: resources that can be used by more than one task. Tasks can overlap in time, but \textbf{cumulative resources} have 
+a specific capacity, so we can't parallelize them in a infinite way.
+\begin{definition}[title = $\textit{cumulative}(\dots)$]
+    Given tasks $t_1, \dots, t_k$ each associated with a start time $S_i$, duration $D_i$, resource requirement $R_i$ and a resource with a capacity $C$,
+    the $\textit{cumulative}(\dots)$ constraint is defined as follows:
+    $$
+        \begin{gathered}
+            \textit{cumulative}([S_1, \dots, S_k], [D_1, \dots, D_k], [R_1, \dots, R_k], C) \text{ holds if and only if } \\
+            \sum_{i | S_i \leq u \leq S_i + D_i} R_i \leq C \text{ } \forall u \in D
+        \end{gathered}
+    $$
+\end{definition}
+$4^{th}$ \textbf{Ordering constraint}. \\
+It enforces an ordering between the variables or the values. An example is the \textbf{lexicographic ordering constraint}: it requires a sequence of decision 
+variables to be lexicographically less than or equal to another sequence of variables.
+\begin{definition}[title = $\textit{lex}\leq(\dots)$]
+    $$
+        \begin{gathered}
+            \textit{lex}\leq([X_1, X_2, \dots, X_k], [Y_1, Y_2, \dots, Y_k]) \text{ holds if and only if } \\
+            X_1 \leq Y_1 \text{ } \wedge \\
+            (X_1 = Y_1 \rightarrow X_2 \leq Y_2) \text{ } \wedge \dots \\
+            (X_1 = Y_1 \wedge X_2 = Y_2 \wedge \dots \wedge X_{k-1} = Y_{k-1} \rightarrow X_k \leq Y_k)
+        \end{gathered}
+    $$
+\end{definition}
+This constraint is very useful for breaking solution symmetries.

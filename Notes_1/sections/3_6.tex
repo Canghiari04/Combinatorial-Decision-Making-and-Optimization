@@ -1,0 +1,24 @@
+\textbf{Specialized propagation} is a propagational algorithm based on the \textbf{semantic} of the constraint. So, we don't put its propagation in a naive way but 
+we do it in the fastest way exploiting the semantic of that specific constraint. \vspace{7pt}
+
+Such approach can be potentially much more efficient than a general approach, but it's not always easy to develop. \vspace{7pt} 
+
+As we already know, \textbf{global constraints} are very useful for the modelling phase, but at the same time they embed specialized propagation algorithms
+making the propagational process much more effective than the other ways to express the same complex constraints. \vspace{7pt}
+
+We can see global constraints benefits in two perspectives:
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item \textbf{Modelling benefits}. 
+    \begin{itemize}
+        \item Reduce the gap between the problem description and the formal description (\textit{the model}).
+        \item May allow the expression of constraints that are otherwise not possible to state using primitive constraints.
+    \end{itemize} 
+    \item \textbf{Solving benefits}. 
+    \begin{itemize}
+        \item Efficient propagation.
+        \item Strong inference in propagation.
+    \end{itemize} 
+\end{itemize}
+Therefore, as rule of thumb, any time we have some complex relationships to express, we should check the existing global constraints and see if we can exploit 
+any of them.  

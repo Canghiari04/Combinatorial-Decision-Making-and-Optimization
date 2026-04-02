@@ -1,0 +1,43 @@
+\textbf{Generalised Arc Consistency}, briefly \textbf{GAC}, is a general form of arc-consistency, that takes in account more than two decision variables at 
+time. Let's see a formal example about it.
+\begin{example}[title = Formal example]
+    Any constraint $C$ defined on $k$ decision variables, $C(X_1, \dots, X_k)$, gives us the following set of allowed combinations of values:
+    $$ C \subseteq D(X_1) \times \dots \times D(X_k) $$
+    Remember, a constraint is a mathematical relationship over a subset of the cartesian product of all decision variables domains. \vspace{7pt}
+    
+    Each allowed tuple $(d_1, \dots, d_k) \in C$ is a \textbf{support} for $C$.  \vspace{7pt}
+
+    Therefore, we say that the general constraint $C(X_1, \dots, X_k)$ is \textbf{GAC} if and only if:
+    $$ \forall X_i \in \{X_1, \dots, X_k\} \text{ and } \forall v \in D(X_i) \text{ for } i \in \{1, \dots, k\}, v \in C $$
+    A Constraint Satisfaction Problem is \textbf{GAC} if and only if all its constraints are \textbf{GAC}.
+\end{example}
+Arc-consistency is a more specific case about Generalised Arc Consistency, where the total number of decision variables taken in account is equal to $k = 2$,
+so the set of decision variables is $\{X_1, X_2\}$.
+\begin{example}
+    e.g. Arc-consistency.
+    $$ D(X_1) = \{1, 2, 3\}, D(X_2) = \{2, 3, 4\}, C: X_1 = X_2 $$
+    Is constraint $C$ arc-consistent? \vspace{7pt}
+
+    Some values of the decision variables domains do not have a \textbf{support}, in particular:
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item $1 \in D(X_1)$ and $4 \in D(X_2)$ do not have a support respectively in $D(X_2)$ and $D(X_1)$.
+        \item $X_1 = 1$ and $X_2 = 4$ are inconsistent partial assignments, so they should be deleted from their domains.
+    \end{itemize} \vspace{7pt}
+    Even though there are some values able to satisfy the constraint, $C$ is not arc-consistent since every value does not have a \textbf{support}.
+\end{example}
+\begin{example}
+    e.g. Generalised Arc Consistency. 
+    $$ D(X_1) = \{1, 2, 3\}, D(X_2) = \{1, 2\}, D(X_3) = \{1, 2\}, C:\textit{alldifferent}([X_1, X_2, X_3]) $$
+
+    Is constraint $C$ GAC? \vspace{7pt}
+
+    It's quite easy to state that this constraint is not in GAC, but anyway more formally we have to say:
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item $1 \in D(X_1)$ and $2 \in D(X_1)$ do not have a support.
+        \item $X_1 = 1$ and $X_1 = 2$ are inconsistent partial assignments.
+    \end{itemize} 
+\end{example}
+If we are able to detect where the inconsistencies are, thanks to propagation, we can remove these values from the decision variables domains, achieving our 
+main goal. 
