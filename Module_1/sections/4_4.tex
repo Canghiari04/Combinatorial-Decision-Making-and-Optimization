@@ -1,0 +1,32 @@
+Naturally, a constraint solver uses a BTS algorithm within propagation. At each search decision, so at every assignment, it propagates the whole set of
+constraints to remove inconsistent values from the domains of the future variables. \vspace{7pt}
+
+The main advantages of a mechanism like this are:
+\begin{enumerate}
+    \item \textbf{Shrink} the domains of the future variables.
+    \item \textbf{Propagate} all the constraints before search, and only when necessary ones during the search.
+\end{enumerate}
+
+However, both approaches, respectively with and without propagation, have the same complexity, equal to: 
+$$ O(d^n) $$
+where:
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item $d \rightarrow$ domain size
+    \item $n \rightarrow$ number of decision variables
+\end{itemize}
+For sure, using the propagation of constraints we can reduce the complexity of BTS algorithm, even though it remains exponential in size.
+\begin{example}
+    e.g. Same BTS example as before but with propagation. \vspace{7pt}
+
+    Before the search, or the assignments, we start from the propagation, observing which values have a support in the other future variables domains.
+    $$ C_2 : D(X_2) = \{1, 2, \bar{3}\}, D(X_3) = \{\bar{1}, 2, 3\}$$
+    After the initial propagation, we can already state that values $3$ from $D(X_2)$ and $1$ from $D(X_3)$ do not have a support. Therefore, we can erase them 
+    before the search phase. \vspace{7pt}
+
+    \textbf{Why don't we have also constraint $C_1$}? 
+
+    Because $C_1$ is already in AC, so we don't need to propagate. However, after first assignment ($X_1 = 1$) something changes. Since we assign a value 
+    to the decision variable $X_1$, we have to propagate the first constraint and the second one since they share a specific decision variable $X_2$. 
+    $$ C_1 : D(X_2) = \{\bar{1}, 2\}, C_2 : D(X_3) = \{\bar{2}, 3\} $$
+\end{example}

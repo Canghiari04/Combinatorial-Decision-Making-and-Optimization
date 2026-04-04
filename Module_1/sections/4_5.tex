@@ -1,0 +1,36 @@
+So far, we understood that the search process is based on three main features: search tree, branching decisions and constraint propagation. Now we move 
+to the topic of search heuristics. \vspace{7pt}
+
+At any time during the search we have to handle a variable, creating a node representing that variable and the branching decisions coming out of it. So,
+how do we choose the decision variable and its values? \vspace{7pt}
+
+We divide the \textbf{search heuristics} in:
+\begin{enumerate}
+    \item \textbf{Problem specific heuristics}. \\
+    Looking at the current problem we could identify something and apply it in our heuristic to find a solution. 
+    \item \textbf{Generic heuristics}. \\
+    Type of heuristics that can be applied to any problem. Additionally, generic heuristics are divided into:
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item \textbf{Static heuristics}. \\ 
+        The order of exploration is already known before the search phase.
+        \item \textbf{Dynamic heuristics}. \\ 
+        The order of exploration is decided dynamically during the search phase.
+    \end{itemize}
+\end{enumerate}
+
+\textbf{How can we design search heuristics}? \\
+Assuming a feasible problem, it's very common to choose variables and values that are likely to yield a solution. However, first of all there is no guarantee 
+of feasibility and secondly sometimes we get stuck in a kind of unfeasible sub-tree, making the CSP really difficult. Therefore, heuristics are designed in a
+such way that if we get stuck in a wrong solution they help us to get out from this unfeasible sub-tree as soon as possible. \vspace{7pt}
+
+Almost of the heuristics are designed on the \textbf{fail-first principle}: try first where you are most likely to fail so as to backtrack immediately. Of course,
+we never know if a particular sub-tree is part of the final solution at the beginning. Therefore, heuristics try to take some trade-off, defining a sort of 
+strategy to find out the solution. We have two different approaches divided as follows:
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item Choose next the \textbf{variable} that is most likely to cause failure.
+    \item Choose next the \textbf{value} that is most likely to be a part of a solution.
+\end{itemize}  
+Most of the heuristics rely on the variables choice, formally named \textbf{Variable Ordering Heuristics (VOHs)}: if we are in an unfeasible solution, the algorithm
+will try all the possible values to discover at the end its unfeasability.
