@@ -1,0 +1,14 @@
+In this type of heuristic we assign a \textbf{weight} to each constraint, initially set to $1$. The total variable weight comes from the summation 
+of the constraints in which it is involved. \vspace{7pt}
+
+\textbf{How do we assign weights to constraints}? \\
+As we already said, initially we set each of them to $1$; as the search proceeds and constraint propagation takes place for a whatever constraint $c$, the 
+weight of that constraint $c$, formally $w(c)$, is going to be incremented by $1$ if that constraint $c$ fails. \vspace{7pt}
+
+The \textbf{weighted degree $w(X_i)$} of a decision variable $X_i$ is described as follows:
+$$ w(X_i) = \sum_{c \text{ s.t. } X _i \in X(x)} w(c) $$
+This typology of constraint is very similar to \textbf{combination strategy} introduced before, since we choose the variable with the minimum ratio:
+$$ \frac{|D(X_i)|}{w(X_i)} $$
+Note: in this case we talk about the weighted degree and not about the degree seen before in the \textbf{most constrained} dynamic strategy. By the weighted
+degree we are defining how much is crucial a whatever constraint $c$, while in the other hand by the most constrained strategy we are counting how many times
+a variable $X_i$ is involved in the set of constraints.

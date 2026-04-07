@@ -1,0 +1,14 @@
+Assuming a variable $L$ as the target value of resources we can use, we have different ways to restart the search process:
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item \textbf{Constant restart}. \\
+    Everytime $L$ is totally consumed we restart the search process.
+    \item \textbf{Geometric restart}. \\
+    It introduces another parameter $\alpha$, the resource limit now becomes $\alpha^{n} \times L$, where $n \in N$. Everytime the new limit $\alpha^{n} \times L$
+    is consumed, we restart the search process and we increment the exponential value of $\alpha$ ($\alpha^{n + 1}$).
+    \item \textbf{Luby restart}. \\
+    \textbf{Luby restart} is the more effective approach for any kind of Constraint Satisfacion Problem. We restart the search process after $s[i] \times L$
+    resources are consumed, where $s[i]$ is the $i^{th}$ number in the \textbf{Luby sequence}.
+\end{itemize}
+
+Note: the \textbf{domain weighted heuristic} (\textbf{domWdeg}) is quite effective within \textbf{restart strategy}.

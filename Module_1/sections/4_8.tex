@@ -1,0 +1,35 @@
+Another thing we can do to improve our search performance comes from the \textbf{heavy tail behaviour}. Assuming a Constraint Satisfaction Problem that 
+requires some inputs (\textit{e.g. in the n-queens problem the number of queens is an input parameter}), its complexity depends from the size of 
+the input parameters, even though the model still always the same. \vspace{7pt}
+
+We often observe some exceptionally hard instances that take exceptionally longer time to solve. Of course, solving an instance of the n-queens problem 
+within $1000$ of queens takes much more time than solve it with $4$ queens. \vspace{7pt}
+
+The thing is: \textbf{why this is happening}? \\
+The main observation is that: this occurs not because any instance of the problem is itself difficult to solve by nature, but because we are playing
+with different parameters of the solver. For some combinations between the instances of the problem and the solver parameters, we get trapped into an 
+exponential subtree, making the problem difficult to solve. \vspace{7pt}
+
+At the beginning of the search process all the heuristics used are unreliable: if we make a mistake early during search, we get stuck in a subtree.
+Therefore, the conclusion is that we don't really know how heuristics work, such mistakes or wrong decisions seem to be totally \textbf{random}. \vspace{7pt}
+
+In order to avoid these random mistakes we can do:
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item \textbf{Randomization}. \\ 
+    Since these mistakes are random, why don't we introduce \textbf{randomization} in our solvers also? By randomization we can kill this effect associated to 
+    randomness. For instance we could: 
+    \begin{enumerate}
+        \item Pick some variables and/or values randomly.
+        \item Break ties randomly.
+    \end{enumerate}
+    \item \textbf{Restarting}. \\
+    \textbf{Restart} the search process can be very useful when the algorithm keeps backtracking without returning us anything. For sure, to be effective 
+    we have to search in a different way anytime we restart the process. Searching anytime differently we also introduce:
+    \begin{enumerate}
+        \item Randomization.
+        \item Learning from the accumulated experiences of previous runs, or in other words previous runs can be effective for the following ones.
+    \end{enumerate}
+    \item \textbf{Randomization + Restarting}. \\
+    We could also combine together the previous strategies, deleting the huge variance in solver performance. 
+\end{itemize}

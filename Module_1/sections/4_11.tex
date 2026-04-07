@@ -1,0 +1,26 @@
+Let's take a look about the things seen so far.
+
+\hspace{3.5pt} \textbf{CP}.
+\begin{itemize}
+    \renewcommand{\labelitemi}{+}
+    \item A generic and complete approach with a focus on constraints and feasibility. We can apply it to model any optimization problem and giving to it enough time it will explore the whole search tree, finding a feasible solution.
+    \item Easy modelling and control of search.
+\end{itemize} \vspace{3.5pt}
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item Cannot scale to large optimization problems. The search tree can be quite huge, making the search process very challenging.
+    \item Poor in optimization with loose bounds on the objective function.
+\end{itemize} 
+
+\hspace{3.5pt} \textbf{Heuristic search}.
+\begin{itemize}
+    \renewcommand{\labelitemi}{+}
+    \item Scales to large optimization problems. For instance, local search or meta-heuristics are the kind of techniques that do no search over the whole search tree, but in portions of it.
+    \item Effective in finding good-quality solutions quickly.
+\end{itemize} \vspace{3.5pt}
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item Finding an initial solution and exploring a large neighborhood can be challenging.
+    \item Neighborhoods are problem-specific.
+\end{itemize} 
+Why don't we combine both of them, trying to explore exhaustively the search tree as CP and improving the solution in a more effective way like heuristics?
