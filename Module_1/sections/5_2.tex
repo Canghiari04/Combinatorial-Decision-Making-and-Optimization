@@ -1,0 +1,6 @@
+Given a boolean formula with $n$ variables, how can we assign truth values to these variables? \vspace{7pt}
+
+We could try to use the \textbf{brute force approach}: build a truth table with $2^n$ different entries and search for the most feasible boolean assignment.
+This approach will always work but it's exponential in size according to the number of the variables, impractical for huge boolean formulas. \vspace{7pt}
+
+We need a dedicated SAT solver for checking the satisfiability of a formula and finding a satisfying assignment.

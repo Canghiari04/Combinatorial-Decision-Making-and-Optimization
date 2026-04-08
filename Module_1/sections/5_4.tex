@@ -1,0 +1,31 @@
+\begin{definition}
+    A formula $f$ is \textbf{satisfiable} if there is an assignment of values to the variables under which $f$ evaluates to $T$. \vspace{7pt}
+
+    Note: satisfiability is about finding a solution to a set of constraints, where each constraint is expressed as a propositional formula.
+\end{definition}
+\begin{definition}
+    A formula $f$ is \textbf{valid} if $f$ always evaluates to $T$ for any assignment of values to the variables. \vspace{7pt}
+
+    A formula $f$ is \textbf{valid} also if and only if $\neg f$ is UNSAT.
+\end{definition}
+If we give to the SAT solver the last statement reported, telling us that it is \textbf{UNSAT}, it really means that originally that problem is \textbf{SAT}. Let's 
+take a look at an example for a better understanding.
+\begin{example}
+    e.g. Proving the de Morgan's law. \vspace{7pt}
+
+    The de Morgan's law says:
+    $$ \overline{(a \wedge b)} \equiv \neg a \vee \neg b$$
+    Proving this equivalance can be done exploiting the truth tables, searching for a feasible assignment of truth values. As we already know, this approach 
+    does not scale very well for more complex problems, since it grows exponentially in size. \vspace{7pt}
+
+    Given $a \wedge b \equiv \overline{\overline{a \wedge b}}$, the same equivalance can be expressed in the following way:
+    $$ a \wedge b \leftrightarrow \overline{(\neg a \vee \neg b)} $$
+    nothing changes, we just express the original equivalance in a different way. \vspace{7pt}
+
+    This last step helps us to prove the de Morgan's law. Giving the negated formula
+    $$ \neg (a \wedge b \leftrightarrow \overline{(\neg a \vee \neg b)}) $$
+    to the SAT solver and proving that it is unsatisfiable by any possible assignment, we can derive that the original formula, $f_1 \leftrightarrow f_2$, is 
+    \textbf{valid}. \vspace{7pt}
+
+    This is the chore mechanism of the SAT solver.
+\end{example}

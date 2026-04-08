@@ -1,1 +1,29 @@
-\dots
+The acronym \textbf{SAT} comes from the word \textbf{satisfiability}. A SAT problem is a well-known decision problem: given a propositional formula is 
+satisfiable or not? \vspace{7pt}
+
+Before moving on, we define formally what is a propositional formula and some properties about it.
+\begin{definition}
+    A formula in propositional logic is composed by boolean variables and logical operators, which are divided into:
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item $\neg \rightarrow$ negation
+        \item $\vee \rightarrow$ disjuction
+        \item $\wedge \rightarrow$ conjuction
+        \item $\rightarrow \rightarrow$ implication
+        \item $\leftrightarrow \rightarrow$ double implication
+    \end{itemize}
+\end{definition}
+\begin{definition}
+    A propositional formula is \textbf{satisfiable} if and only if it is possible to find a truth assignment to the variables that yields the formula true.
+\end{definition}
+\begin{example}
+    e.g. Examples of satisfiability and unsatisfiability. \vspace{7pt}
+
+    For $p = T$ and $q = F$, the following propositional formulas are:
+
+    $$ (p \vee q) \wedge (\neg p \vee \neg q) \wedge (p \vee \neg q) \rightarrow \text{ SAT} $$ 
+    $$ (p \vee q) \wedge (\neg p \vee \neg q) \wedge (p \vee \neg q) \wedge (\neg p \vee q) \rightarrow \text{ UNSAT} $$
+
+    We evaluate each time the whole formula. When we prove a formula we said that it is \textbf{SAT} (\textit{satisfiable}) or whether we are not able to 
+    satisfy it we said that it is \textbf{UNSAT} (\textit{unsatisfiable}).
+\end{example}
