@@ -1,1 +1,77 @@
-\dots
+\begin{example}
+    e.g. Encoding a logic puzzle. \vspace{7pt}
+
+    We consider the following clues:
+    \begin{enumerate}
+        \item Good-natured tenured professors are dynamic.
+        \item Grumpy student advisors play slot machines.
+        \item Smokers wearing a cap are phlegmatic.
+        \item Comical student advisors are professors.
+        \item Smoking untenured members are nervous.
+        \item Phlegmatic tenured members wearing caps are comical.
+        \item Student advisors who are not stock market players are scholars.
+        \item Relaxed student advisors are creative.
+        \item Creative scholars who do not play slot machines wear caps.
+        \item Nervous smokers play slot machines.
+        \item Student advisors who play slot machines do not smoke.
+        \item Creative good-natured stock market players wear caps.
+    \end{enumerate} \vspace{7pt}
+
+    Can we conclude that \textbf{no student advisor is smoking}? \vspace{7pt}
+
+    In order to answer the previous question, we must give a name for every notion to be formalized. \vspace{7pt}
+
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \textbf{Name} & \textbf{Meaning} & \textbf{Opposite} \\ \hline
+            $a$ & good-natured & grumpy \\ \hline
+            $b$ & tenured & \\ \hline
+            $c$ & professor & \\ \hline
+            $d$ & dynamic & phlegmatic \\ \hline
+            $e$ & wearing a cap & \\ \hline
+            $f$ & smoke & \\ \hline
+            $g$ & comical & \\ \hline
+            $h$ & relaxed & nervous \\ \hline
+            $i$ & play stock market & \\ \hline
+            $j$ & scholar & \\ \hline
+            $k$ & creative & \\ \hline
+            $l$ & play slot machine & \\ \hline
+            $m$ & student advisor & \\ \hline
+        \end{tabular}
+    \end{center} \vspace{7pt}
+
+    Defined a name for every notion, now we are able to express natural language clues in propositional formulas. For instance, the first clue:
+    $$ \text{Good-natured tenured professors are dynamic} $$ 
+    becomes:
+    $$ (a \wedge b \wedge c) \rightarrow d $$
+    where:
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item $a \rightarrow $ good-natured
+        \item $b \rightarrow $ tenured
+        \item $c \rightarrow$ professors
+        \item $d \rightarrow$ dynamic
+    \end{itemize} \vspace{7pt}
+
+    Therefore, the whole set of clues becomes as follows:
+    \begin{enumerate}
+        \item $(a \wedge b \wedge c) \to d$
+        \item $(\neg a \wedge m) \to l$
+        \item $(f \wedge e) \to \neg d$
+        \item $(g \wedge m) \to c$
+        \item $(f \wedge \neg b) \to \neg h$
+        \item $(\neg d \wedge b \wedge e) \to g$
+        \item $(\neg i \wedge m) \to j$
+        \item $(h \wedge m) \to k$
+        \item $(k \wedge j \wedge \neg l) \to e$
+        \item $(\neg h \wedge f) \to l$
+        \item $(l \wedge m) \to \neg f$
+        \item $(k \wedge a \wedge i) \to e$
+    \end{enumerate} \vspace{7pt}
+
+    After this process of encoding, the original question now is:
+    $$ \neg (m \wedge f)? $$
+    Giving to the SAT solver the previous question and the set of propositional formulas listed before, it proves that the formula $\neg (m \wedge f)$ is UNSAT,
+    so we conclude saying that there is no student advisor that is smoking given this set of clues.
+\end{example}
