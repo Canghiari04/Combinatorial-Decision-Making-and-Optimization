@@ -1,0 +1,22 @@
+So far, we focused only on the \textbf{encoding phase}: the way we translate the problem from the natural language expression to a propositional formula.
+Following the SAT solver pipeline, we need to understand also the \textbf{solving phase}, starting from the CNF propositional formula. \vspace{7pt}
+
+In order to understand the CNF formula we introduce some terminology.
+\begin{definition}[title = Literal]
+    Refers either to a boolean variable $p$ or to its negation $\neg p$.
+\end{definition}
+\begin{definition}[title = Clause]
+    A clause is a disjunction of literals. It can be falsified with only one assignment to its literals, where all literals are assigned 
+    to $F$.
+\end{definition}
+\begin{definition}[title = CNF propositional formula]
+    A propositional formula $f$ is in CNF if and only if it is a conjuction of clauses, or a conjuction of disjunction of literals. \vspace{7pt}
+
+    For instance:
+    $$ f = C_1 \wedge C_2 \wedge C_3 $$
+    Formally, the same thing can be expressed as:
+    $$ \bigwedge_{i} \bigvee_{j} l_{ij} $$
+
+    A CNF propositional formula is satisfiable if there exists an assignment satisfying all clauses, otherwise it will be unsatisfiable (\textit{each clause
+    of the more generic formula can be satisfied putting one literal to true}).
+\end{definition}

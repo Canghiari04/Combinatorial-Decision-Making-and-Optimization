@@ -1,0 +1,28 @@
+\textbf{DPLL} is an algorithm to establish the satisfiability or unsatisfiability of a CNF propositional formula. \vspace{7pt}
+
+The basic idea of this algorithm is divided into three main steps:
+\begin{enumerate}
+    \item Apply \textbf{unit resolution} as long as possible. At some point we will not able to derive any other clause, so we integrate search processes, something similar we did with Constraint Programming.
+    \item \textbf{Choose} a boolean decision variable $p$, introducing inside the search tree the cases $p$ and $\neg p$.
+    \item After we introduced the positive and negative cases, we \textbf{go recursively} until we reach the satisfiability or unsatisfiability condition.
+\end{enumerate}
+\begin{definition}[title = DPLL pseudocode]
+    \begin{algorithmic}
+        \State $\text{DPLL}(X):$
+        \State \hspace{3.5pt} $X = \text{unit-resol(X)}$
+        \If{$X = \emptyset$}
+            \State \hspace{3.5pt} $\text{return}(\textit{sat})$
+        \EndIf
+        \If{$\bot \notin X$}
+            \State \hspace{3.5pt} $\text{choose variable } p \in X$
+            \State \hspace{3.5pt} $\text{DPLL}(X \cup \{p\})$
+            \State \hspace{3.5pt} $\text{DPLL}(X \cup \{\neg p\})$
+        \EndIf
+    \end{algorithmic}
+
+    Before moving on, let's take a look at the previous snippet of code. The main steps of the DPLL algorithm can be described as follows:
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item \dots 
+    \end{itemize}
+\end{definition}

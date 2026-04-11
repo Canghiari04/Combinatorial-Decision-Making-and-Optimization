@@ -1,0 +1,64 @@
+Given a formula represented in CNF, the SAT solver uses a basic method to solve it. This method is called \textbf{resolution}, and it works as follows:
+from the given clauses, it derives new clauses, with the aim of deriving the empty clause $\bot$, also named \textbf{contradiction}, proving the unsatisfiability 
+of the propositional formula.
+\begin{example}[title = Resolution rule]
+    Given the clauses of the following shape:
+    $$ p \vee W \text{ and } \neg p \vee W $$
+    we can derive $V \vee W$. \vspace{7pt}
+
+    We are able to do this \textit{semplification} according to two different observations:
+    \begin{enumerate}
+        \item The original formulas share a propositional variable, but in one clause is positive while in the other one we get it in a negative form.
+        \item We don't care about the truth value given to $p$. For any assignment we give to $p$, $V$ or $W$ must be true.
+    \end{enumerate}
+\end{example}
+Sometimes a clause consists of a single literal $l$, then the \textbf{resolution rule} allows to remove the literal $\neg l$ from a clause containing exactly 
+$\neg l$.
+\begin{example}[title = Unit resolution]
+    When $V$ or $W$ in 
+    $$ \frac{p \vee V, \neg p \vee W}{V \vee W} $$
+    are empty, we have:
+    $$ \frac{p, \neg p \vee W}{W} \text{ or } \frac{p \vee V, \neg p}{V} $$
+\end{example}
+\begin{example}
+    e.g. Resolution mechanism. \vspace{7pt}
+
+    Prove that the CNF consisting of the following five clauses is UNSAT, so it reaches contradiction.
+    \begin{enumerate}
+        \item $p \vee q$
+        \item $\neg r \vee s$
+        \item $\neg q \vee r$
+        \item $\neg r \vee \neg s$
+        \item $\neg p \vee r$
+    \end{enumerate} \vspace{7pt}
+
+    \textbf{Solution}. \\ 
+    Therefore, we have to match these different clauses until we reach a contradiction, defined in almost of the cases by the bottom symbol $\bot$. For instance,
+    we can start combining together the first and the third clauses as follows:
+    $$ \frac{p \vee q, \neg q \vee r}{p \vee r} $$
+    So, now we have derived a new clause and we add it to our previous list:
+    \begin{enumerate}
+        \item $p \vee q$
+        \item $\neg r \vee s$
+        \item $\neg q \vee r$
+        \item $\neg r \vee \neg s$
+        \item $\neg p \vee r$
+        \item $p \vee r$
+    \end{enumerate} \vspace{7pt}
+
+    We continue to match the clauses until we reach a contradiction. The final result will be as below:
+    \begin{enumerate}
+        \item $p \vee q$
+        \item $\neg r \vee s$
+        \item $\neg q \vee r$
+        \item $\neg r \vee \neg s$
+        \item $\neg p \vee r$
+        \item $p \vee r$
+        \item $r$
+        \item $s$
+        \item $\neg r$
+        \item $\bot$
+    \end{enumerate}
+\end{example}
+The resolution process is perfect when we have to prove the unsatisfiability of a formula. However, almost of the times, this is not enough, since we 
+could need a satisfying solution. Therefore, we need to combine this mechanism with something else.

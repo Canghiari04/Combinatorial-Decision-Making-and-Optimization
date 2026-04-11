@@ -24,7 +24,7 @@ The following example shows us that encoding can be quite complex in SAT, since 
         \item $a_{n-1} \dots a_0 \rightarrow$ digits of the first number
         \item $b_{n-1} \dots b_0 \rightarrow$ digits of the second number
         \item $d_{n-1} \dots d_0 \rightarrow$ digits of the final result
-        \item $c_{n-1} \dots c_0 \rightarrow$ carries digits. When we add two binary numbers equal to $1$, we carry on the additional digit to the next column
+        \item $c_{n-1} \dots c_0 \rightarrow$ carry digits. When we add two binary numbers equal to $1$, we carry on the additional digit to the next column
     \end{itemize} \vspace{7pt}
 
     For instance, the sum of $7 + 21$ is described by the image above: \vspace{3.5pt}
@@ -56,7 +56,7 @@ The following example shows us that encoding can be quite complex in SAT, since 
         \end{enumerate} \vspace{7pt}
 
         As we already said, the SAT solver works only with propositional formulas. Therefore, we need to convert these subprocesses into their propositional
-        counterparts. They becomes:
+        counterparts. They become:
         \begin{enumerate}
             \item $$ a_i \leftrightarrow b_i \leftrightarrow c_i \leftrightarrow d_i $$
             \item $$ c_{i+1} \leftrightarrow (a_i \wedge b_i) \vee (a_i \wedge c_i) \vee (b_i \wedge c_i) $$
