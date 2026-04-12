@@ -8,21 +8,74 @@ The basic idea of this algorithm is divided into three main steps:
 \end{enumerate}
 \begin{definition}[title = DPLL pseudocode]
     \begin{algorithmic}
-        \State $\text{DPLL}(X):$
-        \State \hspace{3.5pt} $X = \text{unit-resol(X)}$
-        \If{$X = \emptyset$}
-            \State \hspace{3.5pt} $\text{return}(\textit{sat})$
-        \EndIf
-        \If{$\bot \notin X$}
-            \State \hspace{3.5pt} $\text{choose variable } p \in X$
-            \State \hspace{3.5pt} $\text{DPLL}(X \cup \{p\})$
-            \State \hspace{3.5pt} $\text{DPLL}(X \cup \{\neg p\})$
-        \EndIf
+        \Procedure{DPLL}{$X$}
+            \State $X = \text{unit-resol(X)}$
+            \If{$X = \emptyset$}
+                \State $\text{return}(\textit{sat})$
+            \EndIf
+            \If{$\bot \notin X$}
+                \State $\text{choose variable } p \in X$
+                \State $\text{DPLL}(X \cup \{p\})$
+                \State $\text{DPLL}(X \cup \{\neg p\})$
+            \EndIf
+        \EndProcedure
     \end{algorithmic}
 
     Before moving on, let's take a look at the previous snippet of code. The main steps of the DPLL algorithm can be described as follows:
-    \begin{itemize}
-        \renewcommand{\labelitemi}{-}
-        \item \dots 
-    \end{itemize}
+    \begin{enumerate}
+        \item First of all, we apply \textbf{unit resolution} as long as possible.
+        \item We check if we have reached the \textbf{contradiction}, if so we return the satisfiability condition.
+        \item If we didn't come up with the bottom or the empty set, we add a new boolean variable inside the description of the problem.
+        \item Finally, we augment the original set of propositional formulas, adding the positive and negative cases of boolean variable chosen.
+    \end{enumerate}
 \end{definition}
+DPLL and Constraint Programming are very similar paradigms:
+\begin{enumerate}
+    \item Like Constraint Programming, we check during the resolution if we could reach a contradiction; if so, we backtrack choosing another variable or assigning another boolean value.
+    \item Both of them are complete methods. Giving to them enough time, they always return a final answer that might be either positive or negative.
+    \item Efficiency strongly depends on the choice of the variable.
+\end{enumerate}
+\begin{example}
+    e.g. DPLL resolution process. \vspace{7pt}
+
+    \begin{enumerate}
+        \item $\neg p \lor \neg s$
+        \item $\neg p \lor \neg r$
+        \item $\neg q \lor \neg t$
+        \item $p \lor r$
+        \item $p \lor s$
+        \item $r \lor t$
+        \item $\neg s \lor t$
+        \item $q \lor s$
+        \item $q \lor \neg r$
+    \end{enumerate} \vspace{7pt}
+
+    This set of propositional formulas doesn't allow any unit resolution, since there is no boolean variable alone. Therefore, we need to choose a variable 
+    and add it inside this set, defining its positive or negative value. \vspace{7pt}
+
+    Assuming we choose the boolean variable $p$ and we add it inside the resolution in its positive form $p = T$, the mechanism goes as follows:
+    \begin{enumerate}
+        \item $\neg s \ (1)$ 
+        \item $\neg r \ (2)$
+        \item $q \ (\neg s, 8)$ 
+        \item $t \ (\neg r, 6)$
+        \item $\neg t \ (q, 3)$
+        \item $\bot \ (t, \neg t)$
+    \end{enumerate} \vspace{7pt}
+
+    Note: after we add in the set $p = T$ then $(1)$ and $(2)$ propositional formulas of the original list must be exactly true, therefore both $\neg s$ and 
+    $\neg r$ must be equal to false. \vspace{7pt}
+
+    As we can observe, we have reached a contradiction, so the problem is unsatisfiable \textit{(UNSAT)}. Now we try with its counterpart, adding to 
+    the original list of propositional formulas $\neg p$.
+    \begin{enumerate}
+        \item $r(4)$
+        \item $s(5)$
+        \item $q(r, 9)$
+        \item $t(s, 7)$
+        \item $\neg t(q, 3)$
+        \item $\bot (t, \neg t)$
+    \end{enumerate} \vspace{7pt}
+
+    Again, we have reached a contradiction, therefore the whole problem is UNSAT.
+\end{example}
