@@ -1,1 +1,40 @@
-\dots
+We know how the DPLL algorithm works in general terms, a mechanism where \textbf{unit resolution} and \textbf{search} are combined together. \vspace{7pt}
+
+Now we move to the implementation of the algorithm. A direct implementation of the pseudocode seen so far would make a copy of the \textit{CNF} $X$ at every
+recursive call (\textit{$X$ is the propositional formula}), potentially going out of memory very quickly. \vspace{7pt}
+
+What really happens is that somehow the implementation of the algorithm mimics the DPLL approach described previously, using a main data structure are performed 
+the following operations:
+\begin{enumerate}
+    \item Unit resolution.
+    \item Case Analysis.
+    \item Backtrack.
+    \item Fail.
+\end{enumerate} \vspace{7pt}
+
+So, basically we mimic the four main operations listed before inside a particular data structure, usually called $M$. The basic idea is: keep track of a list $M$
+of literals (\textit{boolean varibles or their negations}) that have been decided and derived during the execution of DPLL.
+
+More formally, the algorithm behaves following some \textbf{rules}:
+\begin{enumerate}
+    \item $M$ starts empty.
+    \item $M$ is extended when:
+    \begin{enumerate}
+        \item \textbf{UnitPropagate}, a literal is derived by unit resolution;
+        \item \textbf{Decide}, a new case analysis starts.
+    \end{enumerate}
+    \item $M$ is repaired when a contradiction is found:
+    \begin{enumerate}
+        \item \textbf{Backtrack}, go back to the last decision, remove everything behind the last decision, negate the decision, and continue with a new decision;
+        \item \textbf{Fail}, otherwise, when it is not possible to backtrack, fail.
+    \end{enumerate}
+\end{enumerate}
+
+Additionally, it uses a little bit of formal definitions about propositional logic, which are:
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item A literal $l$ holds in $M$ ($M \models l$) if and only if $l$ occurs in $M$.
+    \item A clause $C$ yields contradiction ($M \models \neg C$) if and only if for every literal $l$ in $C$, we have, $M \models \neg l$. It simply says: if all the literals of $C$ are present in $M$ in their negated form, we cannot satisfy anymore the clause.
+    \item $l$ is \textit{undefined} in $M$ if and only if neither $M \models l$ nor $M \models \neg l$, so $l$ is not in the list $M$.
+    \item A decision of a literal, described as $l^d$ (\textit{there isn't anything about mathematics, it expresses when a decision about a boolean variable was taken}), originates from a decision in the DPLL algorithm.
+\end{itemize}

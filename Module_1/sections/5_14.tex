@@ -1,0 +1,153 @@
+\begin{example}
+    e.g. Mimicking DPLL algorithm. \vspace{7pt}
+
+    Starting from the following list of clauses:
+    \begin{enumerate}
+        \item $\neg p \lor \neg s$
+        \item $p \lor r$
+        \item $\neg s \lor t$
+        \item $\neg p \lor \neg r$
+        \item $p \lor s$
+        \item $q \lor s$
+        \item $\neg q \lor \neg t$
+        \item $r \lor t$
+        \item $q \lor \neg r$
+    \end{enumerate} \vspace{3.5pt}
+    Define if the whole CNF propositional formula is satisfiable or unsatisfiable. \vspace{7pt}
+
+    \textbf{Resolution}. \vspace{7pt}
+    \begin{center}
+        \begin{tabular}{|p{2.5cm}|p{5cm}|}          
+            \hline
+                \textbf{Rule} & $M$\\ 
+            \hline
+                & \\
+            \hline
+                & \\
+            \hline
+                & \\
+            \hline
+                & \\
+            \hline
+                & \\
+            \hline
+        \end{tabular}
+    \end{center} \vspace{7pt}
+
+    At the beginning of any possible resolution, the only rule that can be applied is the \textbf{Decide} one: pick one variable from the list 
+    and give to it a truth value. \vspace{7pt}
+    \begin{center}
+        \begin{tabular}{|p{2.5cm}|p{5cm}|}          
+            \hline
+                \textbf{Rule} & $M$\\ 
+            \hline
+                Decide & $p^d$ \\
+            \hline
+                & \\
+            \hline
+                & \\
+            \hline
+                & \\
+            \hline
+                & \\
+            \hline
+        \end{tabular}
+    \end{center} \vspace{7pt}
+
+    After we decided the boolean variable and gave to it a truth value ($p = T$), we can try to set up the unit propagation, extending $p$ incorporating 
+    new literals. We already know that $p$ is set to true, so we have to check the other clauses attempting to give to each of them the correct boolean value. \vspace{7pt}
+
+    In this case, we can observe:
+    \begin{enumerate}
+        \item $\neg (p = T) \vee \neg s \rightarrow$ $\neg s$
+        \item[4.] $\neg (p = T) \vee \neg r \rightarrow$ $\neg r$
+        \item[8.] $(r = F) \vee t \rightarrow$ $t$
+        \item[6.] $q \vee (s = F) \rightarrow$ $q$
+    \end{enumerate} \vspace{3.5pt}
+    The process goes as described in the list before, propagating unit until we reach the resolution of the problem or a contradiction. Additionally, it's important to state that 
+    the unit propagation does not involve only the boolean variable chosen, but also the ones linked to it. \vspace{7pt}
+    \begin{center}
+        \begin{tabular}{|p{2.75cm}|p{5cm}|}          
+            \hline
+                \textbf{Rule} & $M$\\ 
+            \hline
+                Decide & $p^d$ \\
+            \hline
+                UnitPropagate & $p^d\  \neg s \ \neg r \ t \ q$ \\
+            \hline
+                & \\
+            \hline
+                & \\
+            \hline
+                & \\
+            \hline
+        \end{tabular}
+    \end{center} \vspace{7pt}
+
+    Observing what we did so far, we have reached a contradiction, in particular the literals $t$ and $q$ are set to true but, however, the seventh clause 
+    ($\neg q \vee \neg t$) requires at least one of them assigned to false. Therefore, we backtrack deleting everything we did from the last decision taken and negating 
+    the boolean variable choosen. \vspace{7pt}
+    \begin{center}
+        \begin{tabular}{|p{2.75cm}|p{5cm}|} 
+            \hline
+                \textbf{Rule} & $M$\\ 
+            \hline
+                Decide & $p^d$ \\
+            \hline
+                UnitPropagate & $p^d\  \neg s \ \neg r \ t \ q$ \\
+            \hline
+                Backtrack & $\neg p$ \\
+            \hline
+                & \\
+            \hline
+                & \\
+            \hline
+        \end{tabular}
+    \end{center} \vspace{7pt}
+
+    After the Backtracking rule, we can set up a new unit propagation process, trying to reach the satisfiability of the problem. \vspace{7pt}
+
+    In the negative case, we can state:
+    \begin{enumerate}
+        \item[2.] $(p = F) \vee r \rightarrow$ r
+        \item[5.] $(p = F) \vee s \rightarrow$ s
+        \item[9.] $q \vee \neg (r = T) \rightarrow$ q 
+        \item[3.] $\neg (s = T) \vee t \rightarrow$ t
+    \end{enumerate} \vspace{7pt}
+    \begin{center}
+        \begin{tabular}{|p{2.75cm}|p{5cm}|}          
+            \hline
+                \textbf{Rule} & $M$\\ 
+            \hline
+                Decide & $p^d$ \\
+            \hline
+                UnitPropagate & $p^d\  \neg s \ \neg r \ t \ q$ \\
+            \hline
+                Backtrack & $\neg p$ \\
+            \hline
+                UnitPropagate & $\neg p \ r \ s \ q \ t $ \\
+            \hline
+                & \\
+            \hline
+        \end{tabular}
+    \end{center} \vspace{7pt}
+
+    However, we have reached again the same contradiction as before. Therefore, the final conclusion is the unsatisfiability of the problem. \vspace{7pt}
+    \begin{center}
+        \begin{tabular}{|p{2.75cm}|p{5cm}|}          
+            \hline
+                \textbf{Rule} & $M$\\ 
+            \hline
+                Decide & $p^d$ \\
+            \hline
+                UnitPropagate & $p^d\  \neg s \ \neg r \ t \ q$ \\
+            \hline
+                Backtrack & $\neg p$ \\
+            \hline
+                UnitPropagate & $\neg p \ r \ s \ q \ t $ \\
+            \hline
+                Fail & \\
+            \hline
+        \end{tabular}
+    \end{center} \vspace{7pt}
+\end{example}

@@ -1,0 +1,39 @@
+Let's take a look at the four rules more precisely. As we already know, they are used in order to mimic the real behavior of the DPLL algorithm, since its
+direct implementation it's not so efficient.
+\begin{enumerate}
+    \item \textbf{UnitPropagate}. \\ 
+    Mimics the generation of a new unit clause in DPLL. In practice, what the process really does is to extend the list $M$ with some new literals, 
+    already derived, incorporating them inside the entire formula. Formally, this rule can be described as:
+    $$ M \rightarrow Ml $$
+    This occurs if $l$ is \textbf{undefined} in $M$, not in the list, and the CNF formula contains a clause $C \vee l$ satisfying $M \models \neg C$.
+    \item \textbf{Decide}. \\ 
+    Mimics the choice $p$ in DPLL, when no UnitPropagate is possible. \textbf{Decide} rule does not need any propagation, it just selects which
+    boolean variable to introduce and its truth value.
+    $$ M \rightarrow Ml^d $$
+    This is possible if literal $l$ is \textbf{undefined} in $M$. \vspace{7pt}
+
+    Note: $l^d$ symbolizes the choice done, it does not rely on any other mathematical expression.
+    \item \textbf{Backtrack}. \\ 
+    Mimics backtracking to the negation of the last decision in case a branch is unsatisfiable. Formally, it's defined as follows:
+    $$ Ml^dN \rightarrow M \neg l $$
+    where:
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item $l^d \rightarrow$ decision done
+        \item $N \rightarrow$ set of derivations obtained
+    \end{itemize} \vspace{3.5pt}
+
+    This rule requires that $Ml^dN \models \neg C$ for a clause $C$ in the CNF formula and $N$ does not contain any literal coming from a decision. \vspace{7pt}
+
+    If we reach a contradiction, we have to undo everything that came up from the last decision, deleting $N$ and negating $l$ (\textit{the truth value of the 
+    literal $l$ does not matter, it can be either true or false}). \vspace{7pt}
+
+    Note: \textbf{Backtrack} and \textbf{UnitPropogate} are little bit different. By UnitPropagate we can do something: incorporating literals $l$ to the formula we can still 
+    satisfy the original clause; while in Backtrack there is no way to satisfy the clause $C$.
+    \item \textbf{Fail}. \\ 
+    Mimics the end of DPLL algorithm when every branch, and so the CNF formula, is unsatisfiable.
+    $$ M \rightarrow \textit{fail} $$
+    This happens if $M \models \neg C$ for a clause $C$ in the CNF formula and $M$ does not contain decision literals. \vspace{7pt}
+
+    In practice, we have a clause that cannot be falsified and $M$ does not contain any decision $d$ left to backtrack.
+\end{enumerate}
