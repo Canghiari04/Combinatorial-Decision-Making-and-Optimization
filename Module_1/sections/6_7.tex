@@ -1,0 +1,7 @@
+There are two basic rules to optimize unit propagation:
+\begin{enumerate}
+    \item If all but one of a clause's literals are assigned to false and the remaining literal is unassigned, assign it to true.
+    \item If all clause's literals are assigned to false, return the \textbf{unsatisfiability} of the problem.
+\end{enumerate}
+The main idea about the naive algorithm is about to inspect each clause and apply the two previous rules; it repeats this process until no new assignment are
+made. However, for more complex propositional formulas inspect each clause one by one cannot be feasibile, we need an efficient way to do so.

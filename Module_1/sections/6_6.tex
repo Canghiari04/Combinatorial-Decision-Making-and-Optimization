@@ -1,0 +1,10 @@
+SAT and CP problems have different similarities, like \textbf{restart}. Restart is a very effective activity for SAT solving, and typically it's done when 
+the search for a solution does not progress while many clauses have been learnt. \vspace{7pt}
+
+Each time we restart the SAT solving the following benefits are achieved:
+\begin{enumerate}
+    \renewcommand{\labelitemi}{-}
+    \item We get a different new CNF propositional formula.
+    \item We are able to randomize the variable selection heuristic, always based on the weights of the boolean variables.
+    \item Previously derived clauses and the activities influence the variable ordering heuristic.
+\end{enumerate}

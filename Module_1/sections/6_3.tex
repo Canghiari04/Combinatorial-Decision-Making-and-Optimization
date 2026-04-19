@@ -1,0 +1,9 @@
+How does the SAT solver find out all these informations? First of all backjump is an unit propagation process on a derivable conflict clause, which is 
+added to the original CNF. In order to be able to backjump the solver stores:
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item Each decision.
+    \item At every UnitPropagate step it stores the corresponding clause and the derived literal.
+\end{itemize}
+The whole thing is saved inside a particular data structure, named \textbf{implication graph}. At each contradiction reached, we investigate over this 
+data structure to find out which are the clauses and the literals that play a role in the conflict.

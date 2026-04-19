@@ -1,0 +1,21 @@
+DPLL algorithm is not always implemented, in real terms the mechanism is set up for mimicking the real behavior of the process, using four main rules:
+\begin{enumerate}
+    \item Unitpropagation.
+    \item Decide.
+    \item Backtrack.
+    \item Fail.
+\end{enumerate} \vspace{7pt}
+Anyway, also the approximated algorithm suffers from two main inefficiencies:
+\begin{enumerate}
+    \item \textbf{No learning}.
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item If we fail, the algorithm throws away all the work performed to conclude that the current \textbf{partial assignment} is bad when we reach a contradiction.
+        \item It revisits bad partial assignments that lead us to a contradiction due to the same root cause.
+    \end{itemize}
+    \item \textbf{Chronological backtracking}.
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item Backtracks at one previous level, even if it can be deduced that the current bad partial assignment is caused by another level.
+    \end{itemize}
+\end{enumerate}

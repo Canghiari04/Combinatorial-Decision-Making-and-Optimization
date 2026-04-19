@@ -1,0 +1,11 @@
+Mimics backtracking to an earlier decision literal than the last one. Formally, this process is described as follows:
+$$ Ml^dN \rightarrow Ml' $$
+This occurs if $Ml^dN \models \neg C$ for a clause $C$ in the CNF and there is a clause $C' \vee l'$ derivable from the CNF such that $M \models \neg C'$ and $l'$
+is not defined in $M$. \vspace{7pt}
+
+It may seem quite difficult to understand, so let's take in account our previous example. The \textbf{derivable clause} $C' \vee l'$ allows us to derive 
+the literal $l'$ such that the entire propositional formula remains satisfiable. Roughly speaking, in our example would be:
+$$ C' \vee l' = \neg q \vee \neg t $$
+where:
+$$ \underbrace{p^d \ q}_{M} \underbrace{r^d}_{l^d} \underbrace{s \ t^d \ u}_{N} \rightarrow \underbrace{p^d \ q}_{M} \underbrace{\neg t}_{l'}$$
+We already know that $C'$ is not satisfiable, so we need something like $l'$ in order to make the entire formula set to true. \vspace{7pt}

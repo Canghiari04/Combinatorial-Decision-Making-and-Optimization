@@ -1,0 +1,40 @@
+Any unit propagation process is performed following the \textbf{watched literals} behavior. Watched literals is the best known way to approximate the 
+naive algorithm. The approximated algorithm is defined by the following steps:
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item Watch two unassigned literals in every clause in preparation of unit propagation.
+    \item Examine the clause only when one of them is assigned to false.
+    \item For each literal, maintain a watch list containing all the clauses that are composed by that literal.
+\end{itemize}
+Whenever a literal $l$ is assigned to true, for each clause $k$ that currently is watching or observing the negated literal $\neg l$, we do:
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item If all but one literal $l$ is assigned to false, assign $l$ to true.
+    \item If all literals are assigned to false, return the unsatisfiability of the problem.
+    \item If any literal is assigned to true, continue.
+    \item Otherwise, remove $k$ from the watch list of $\neg l$ and add it to the watch list of one of its remaining unassigned literals.
+\end{itemize}
+\begin{example}
+    e.g. Watched literals mechanism. \vspace{7pt}
+
+    Given the following clause:
+    $$ c: x_1 \vee \neg x_2 \vee x_4 \vee x_4 $$
+    We are gonna to introduce the main considerations about the watched literals behavior. We suppose that initially the approximated algorithm decided to 
+    observe $x_1$ and $\neg x_2$ literals from clause $c$. \vspace{7pt}
+
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-} 
+        \item $x_3$ is assigned to false ($\neg x_3$), nothing happens, since the clause $c$ is not in the watch list of the boolean variable $x_3$.
+        \item $x_2$ is assign to true ($x_2 \rightarrow \neg x_2 \rightarrow \text{false}$), therefore clause $c$ is inspected. Since there is another literal to observe, we remove $c$ from the watch list of $\neg x_2$ and we add the same clause $c$ in the watch list of $x_4$.
+    \end{itemize} \vspace{7pt}
+
+    The current situation is:
+    $$ c: x_1 \vee \ \text{false} \ \vee \ \text{false} \ \vee x_4 $$
+    both last literals are observed by the clause $c$. \vspace{7pt}
+
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-} 
+        \item $x_4$ is assigned to false ($\neg x_4$). Clause $c$ is again inspected, since it is already in the watch list of $x_4$, so we do unit propagation: all the literals of clause $c$ are assigned to false, so we assign the last literal to true.
+        \item $x_1$ is assigned to true, stating the satisfiability of the clause.
+    \end{itemize}
+\end{example}

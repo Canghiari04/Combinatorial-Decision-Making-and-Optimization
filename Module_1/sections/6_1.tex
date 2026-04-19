@@ -1,0 +1,97 @@
+Therefore, from the previous observations, it has been decided to design another type of SAT solver, named \textbf{Conflict-Driven Clause Learning}. Whenever 
+a contradiction happens, it is set a process composed by the following operations:
+\begin{enumerate}
+    \item \textbf{Clause learning}.
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item Augments the original CNF $X$ propositional formula with an additional \textbf{conflict clause} that summarizes the root cause of the contradiction.
+        \item From the point above, we will learn from the mistakes done and ignore huge sections of the search space that would be useless to explore.
+    \end{itemize}
+    \item \textbf{Backjumping}.
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item Based on the cause of the contradiction, skips the decisions and derivations that did not lead to conflict, going higher in the search tree.
+    \end{itemize}
+\end{enumerate}
+\begin{example}
+    e.g. Dumb example. \vspace{7pt}
+
+    Starting from the following list of clauses:
+    \begin{enumerate}
+        \item $\neg p \vee q$
+        \item $\neg r \vee s$
+        \item $\neg t \vee \neg u$
+        \item $\neg q \vee \neg t \vee u$
+    \end{enumerate} \vspace{3.5pt}
+    Define if the whole CNF propositional formula is satisfiable or unsatisfiable. \vspace{7pt}
+
+    \textbf{Resolution}. \vspace{7pt}
+    \begin{center}
+        \begin{tabular}{|p{2.75cm}|p{5cm}|}          
+            \hline
+                \textbf{Rule} & $M$\\ 
+            \hline
+                Decide & $p^d$ \\
+            \hline
+                UnitPropagate & $p^d \ q$ \\
+            \hline
+                Decide & $p^d \ q \ r^d$ \\
+            \hline
+                UnitPropagate & $p^d \ q \ r^d \ s$ \\
+            \hline
+                Decide & $p^d \ q \ r^d \ s \ t^d$  \\
+            \hline
+                UnitPropagate & $p^d \ q \ r^d \ s \ t^d \ u$  \\
+            \hline
+                & \\
+            \hline
+        \end{tabular}
+    \end{center} \vspace{7pt}
+    Observing what we did so far, we have reached a contradiction. In particular, the literals $t$ and $u$ are set to true but, however, the third clause
+    ($\neg t \vee \neg u$) requires at least one of them assigned to false. We backtrack to the last decision done $t^d$ and setting the literal $t$ to 
+    false ($\neg t$) we state the satisfiability of the problem. \vspace{7pt}
+
+    Anyway, supposing we have a bigger CNF formula, composed by more than four clauses. Even though we define the literal $t$ equal to false ($\neg t$), 
+    we cannot achieve the satisfiability of the problem: we backtrack to the last decision before $t^d$, namely $r^d$, setting its value to another 
+    truth value. Later, we will try again the decision $t^d$ failing in the same conflicts as before. \vspace{7pt}
+    
+    Briefly, even if we backtrack changing truth values, we end always in the same contradictions, failing exactly in the same way. \vspace{7pt}
+
+    It would be nice to understand something more by a contradiction analysis.
+\end{example}
+For the contradiction between the literals $t$, $u$ and the third clause ($\neg t \vee \neg u$), the decision $r^d$ has nothing to do with them. What we 
+really want to understand are the clauses that contribute to the contradiction described in the example: literal $u$ was derived using the fourth clause 
+($\neg q \vee \neg t \vee u$) and the contradiction was found using the third clause. \vspace{7pt}
+
+For sure we fail for the third clause ($\neg t \vee \neg u$), but also we reach a contradiction combining it with the fourth one (\textit{it sets the boolean 
+variable $u$ to true. Therefore, there is a kind of relationship between the third and the fourth clauses}). The main idea is to apply directly the resolution 
+process to these clauses getting a new \textbf{conflict clause}, obtained as follows:
+$$ 5. \ \neg q \vee \neg t $$
+The clause $5.$ is something we learnt after the failure, taking this new information we can do unit propagation in a different way. This newly conflict clause 
+gives us a clue on where to \textbf{backjump}.
+\begin{example}
+    e.g. Extending the same previous example. \vspace{7pt}
+
+    \textbf{Resolution}. \vspace{7pt}
+    \begin{center}
+        \begin{tabular}{|p{2.75cm}|p{5cm}|}          
+            \hline
+                \textbf{Rule} & $M$\\ 
+            \hline
+                Decide & $p^d$ \\
+            \hline
+                UnitPropagate & $p^d \ q$ \\
+            \hline
+                Decide & $p^d \ q \ r^d$ \\
+            \hline
+                UnitPropagate & $p^d \ q \ r^d \ s$ \\
+            \hline
+                Decide & $p^d \ q \ r^d \ s \ t^d$  \\
+            \hline
+                UnitPropagate & $p^d \ q \ r^d \ s \ t^d \ u$  \\
+            \hline
+                Backjumping & $p^d \ q \ \neg t$ \\
+            \hline
+        \end{tabular}
+    \end{center} \vspace{7pt}
+\end{example}

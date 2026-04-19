@@ -1,0 +1,6 @@
+One thing is about learning and an other thing is about the variable choice. So far, we chose variables randomly, but also in the SAT problems the variable
+choice is very important. \vspace{7pt}
+
+The choice of the variable is already integrated by the solvers, based on the concept of \textbf{activity-based search}. They concentrate on the variables 
+causing conflicts, or, in other words, they focus on those variables that appear different times in conflict clauses and in new derived clauses. Each time a variable 
+is involved in these kind of clauses solvers increment its weight associated to it. Therefore, we should select the boolean variable with \textbf{highest weight}.
