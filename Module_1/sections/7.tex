@@ -1,1 +1,6 @@
-\dots
+Encoding in SAT can be \textbf{challenging}. If we are not careful about the encoding phase we may encounter big problems: we cannot directly \textbf{translate}
+any \textbf{Constraint Programming problem} into a \textbf{Satisfiability problem}, as we already did for N-Queens problem in the previous chapter. \vspace{7pt}
+
+The cardinality of the boolean decision variables used, as the number of clauses, can depend also from the dimension of the problem. An approach in which we have 
+a total amount of variables and clauses similar to $n^2$ or worse is not a suitable approach for SAT problems. Not only the resolution of the problem 
+might be very slow, but also the translation of the original propositional formula to its CNF form can be heavy.

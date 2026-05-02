@@ -1,0 +1,25 @@
+Using the existing variables we cannot do better than $O(n^2)$, we need to use additional variables in our encoding. For sure, we improve the number
+of variables but at the same time we should reduce the cardinality of clauses. \vspace{7pt}
+
+In \textbf{sequential encoding} we introduce $n$ new variables $s_i$ used to indicate that the sum has reached $1$ by $i$.
+$$x_1 \rightarrow s_1 \wedge \bigwedge_{1 < i < n}[((x_i \vee s_{i-1})) \wedge (s_{i-1} \rightarrow \neg x_i)] \wedge (s_{n-1} \rightarrow \neg x_n)$$
+$s_i$ keeps track of what happened from the left-most variable of the sequence. Before moving on, let's take a more deep look to the previous formulation:
+\begin{enumerate}
+    \item \textbf{First position}. \\ 
+    If we reach $1$ at the first position of the sequence then $s_1$ must be equal to $1$.
+    \item \textbf{Middle positions}. \\ 
+    In another position different from first one, if we have already reached $1$ by the current boolean variables or before $s_i$ must be satisfied and, 
+    at the same time, all the other variables different from position $i-1$ must be set to false, $0$.
+    \item \textbf{Last position}. \\ 
+    Whether we have reached $1$ then the last boolean variable $x_n$ must be equal to false.
+\end{enumerate}
+The SAT solver uses the CNF version of any propositional formula, therefore the previous formulation becomes:
+$$(\neg x_1 \vee s_1) \wedge \bigwedge_{1 < i < n} [(\neg x_i \vee s_i) \wedge (\neg s_{i-1} \vee s_i) \wedge (\neg s_{i-1} \vee \neg x_i)] \wedge (\neg s_{n-i} \vee \neg x_n)$$
+where:
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item $x_i \rightarrow$ boolean decision variable
+    \item $s_i \rightarrow$ additional boolean variable to keep track of the assigned true values
+\end{itemize}
+Sequential encoding allows us to decrease the total amount of clauses. Overall the complexity of the variables does not really change; what changed it's the 
+complexity of the cardinality of clauses, which from $O(n^2)$ becomes $O(n)$.

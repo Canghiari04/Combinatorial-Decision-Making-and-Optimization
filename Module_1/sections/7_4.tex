@@ -1,0 +1,47 @@
+Another way to encode AtMostOne(\dots) constraint is the \textbf{bitwise encoding}. It introduces $m$ new variables $r_i$, where $m$ is equal to $\text{log}_2n$.
+The additional variables $r_i$ are unique signatures, each boolean variable $x_i$ is mapped to an univocal $r_i$. \vspace{7pt}
+
+For $i \in [1, \dots, n]$, let $b_{i,1}, \dots, b_{i,m}$ be the sequence of binary numbers encoding a whatever boolean variable $x_i$, the bitwise formulation is:
+$$\bigwedge_{1 \leq i \leq n} x_i \rightarrow (r_1 = b_{i,1} \wedge r_2 = b_{i,2} \wedge \dots \wedge r_m = b_{i,m})$$ 
+where:
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item $x_i \rightarrow$ boolean variable
+    \item $r_1, \dots, r_m \rightarrow$ unique signature used for each boolean variable
+    \item $b_{1,m}, \dots, b_{i,m} \rightarrow$ boolean values or bits used to identify univocally the decision variable $x_i$
+\end{itemize}
+Every time $x_i$ is equal to 1, we introduce other booleans to encode that variable $x_i$. Let's see an example for a better understanding.
+\begin{example}
+    e.g. Consider the following equation.
+    $$x_1 + x_2 + x_3 \leq 1$$
+    The total number of variables is $3$, therefore we have to introduce $\text{log}_2(3) \simeq 2$ new $r_i$ additional variables. Looking at what we said 
+    previously, the binary encoding is as follows:
+    $$
+        \begin{aligned}
+            & x_1 \rightarrow (r_1 = 0 \wedge r_2 = 0) \wedge \\ 
+            & x_2 \rightarrow (r_1 = 0 \wedge r_2 = 1) \wedge \\
+            & x_3 \rightarrow (r_1 = 1 \wedge r_2 = 0)
+        \end{aligned}
+    $$
+    In order to represent three variables we just need two bits ($2^2 = 4$ combinations to represent the boolean variables). Following this approach there's no 
+    way that more than one $x_i$ is assigned to $1$. \vspace{7pt}
+
+    This is only the initial step, we know that the next thing to do is to translate the propositional formula to its CNF version, which becomes:
+    $$
+        \begin{aligned}
+            & (x_1 \vee \neg r_1) \wedge (x_1  \vee \neg r_2) \wedge\\ 
+            & (x_2 \vee \neg r_1) \wedge (x_2  \vee r_2)\wedge \\
+            & (x_3 \vee r_1) \wedge (x_3  \vee \neg r_2)
+        \end{aligned}
+    $$
+    For instance, if $x_2$ is equal to 1, then consequently our solver derive that $\neg r_1$ must be equal to false and $r_2$ must be equal to true, setting 
+    in this way the unique signature of the boolean variable $x_2$. \vspace{7pt}
+
+    Moreover, if we suppose that both $x_2$ and $x_3$ are equal to $1$, then $r_1$ additional variable would be false and true at the same time, causing a conflict. Therefore, the input data does not contain at most one single true value.
+\end{example}
+Generally, the CNF version of the bitwise encoding is:
+$$\bigwedge_{1 \leq i \leq n} \bigwedge_{1 \leq j \leq m} \neg x_i \vee r_j [\vee \neg r_j]$$
+The outer loop iterates over each variable $x_i$, while the inner loop looks at their signatures, where $j$ defines the position of the bit. \vspace{7pt}
+
+Comparing the complexities, the bitwise paradigm as more clauses than sequential encoding, up to $O(n\text{log}_2n)$, but less additional 
+variables, up to $O(\text{log}_2n)$.

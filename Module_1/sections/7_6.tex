@@ -1,0 +1,15 @@
+So far, we focused on $k = 1$, discarding a general integer value, and also we used only one specific comparison, $\leq$. As we stated, cardinality constraints 
+are particular types of constraints used very often inside the SAT models, their formally definition is:
+$$\sum_{1 \leq i \leq n} x_i \bowtie k$$
+where:
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item $\bowtie \rightarrow$ comparison, it belongs to the set $\{<, \leq, =, \neq, >, \geq\}$ 
+\end{itemize}
+However, let's take a look to the whole picture considering also other comparisons, in particular:
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item \dots
+\end{itemize}
+As we can notice, every single comparison can be expressed as $\leq$ (less or equal) of a fixed integer number. Therefore, we could reduce our discussion to define 
+the best way to encode the AtMostK(\dots) constraint, since it can be used for any other comparison.

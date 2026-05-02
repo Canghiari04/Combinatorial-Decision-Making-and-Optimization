@@ -1,0 +1,13 @@
+\textbf{Heule encoding} has the same complexities of \textbf{sequential encoding}, since we don't have a different cardinalities of clauses and variables.
+This paradigm is divided into two different resolutions, which are:
+\begin{enumerate}
+    \item $n \leq 4$. \\
+    When the number of variables is less or equal to four, we apply the \textbf{pairwise encoding}, using at most $6$ clauses.
+    $$\bigwedge_{1 \leq i < j \leq n} \neg (x_i \wedge x_j)$$
+    \item $n > 4$. \\
+    We split the sequence of boolean variables into two different sets. The first one contains the first three variables and a new one called $y$, while, in the 
+    other hand, the second set includes the negated version of $y$ plus the remaining part of the original sequence.
+    $$\text{AtMostOne}([x_1, x_2, x_3, y]) \wedge \text{AtMostOne}([\neg y, x_4, \dots, x_n])$$
+    We keep doing the splitting until we reach the desired subdivsion.
+\end{enumerate}
+Just to remind, the complexities about the clauses and variables are equal to $O(n)$.

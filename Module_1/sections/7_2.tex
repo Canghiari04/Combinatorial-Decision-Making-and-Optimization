@@ -1,0 +1,13 @@
+This is the obvious way to encode AtMostOne(\dots) constraint. The main idea is: any combination of two boolean variables cannot be \textbf{true} at the 
+same time. 
+$$\bigwedge_{1 \leq j < i \leq n} \neg(x_i \wedge x_j)$$
+where:
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item $x_i \rightarrow$ boolean variable 
+    \item $x_j \rightarrow$ boolean variable 
+\end{itemize}
+Therefore, for every pair $(i,j) \in [1, \dots, n]$ we define this type of clause and between every of them will be a conjuction. \vspace{7pt}
+
+It's a very simple way to encode the constraint, without the usage of any additional variable. However, the total number of clauses is equal to $O(n^2)$, 
+since we put this constraint for every pair of decision variables $(i,j)$. As we already said, this type of complexity is not suitable for SAT problems.

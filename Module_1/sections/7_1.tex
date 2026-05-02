@@ -1,0 +1,46 @@
+\textbf{Cardinality constraints} are particular types of constraints often used in SAT models, where basically we have to control the summation over 
+a set of boolean variables. Formally, they are defined as follows:
+$$\sum_{1 \leq i \leq n} x_i \bowtie k$$
+where:
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item $x_i \rightarrow$ boolean variable
+    \item $k \rightarrow$ fixed integer number
+    \item $\bowtie \rightarrow$ comparison, it belongs to the set $\{<, \leq, =, \neq, >, \geq\}$ 
+\end{itemize}
+A special case of this definition is:
+$$\sum_{1 \leq i \leq n} x_i = 1$$
+that can be expressed also:
+$$\sum_{1 \leq i \leq n} x_i \leq 1 \wedge \sum_{1 \leq i \leq n} x_i \geq 1 $$
+The \textit{exactly} condition can be described as: we want \textit{at most one} variable set to $1$ and at the same time we would like to obtain 
+\textit{at least one} single variable set to $1$. \vspace{7pt}
+
+Now we write down a set of global constraints in order to describe such relationships, in particular:
+\begin{enumerate}
+    \item $\textbf{AtMostOne}([x_1, x_2, \dots, x_n])$, refers to $$\sum_{1 \leq i \leq n} x_i \leq 1$$
+    \item $\textbf{AtLeastOne}([x_1, x_2, \dots, x_n])$, refers to $$\sum_{1 \leq i \leq n} x_i \geq 1$$
+    \item $\textbf{ExactlyOne}([x_1, x_2, \dots, x_n])$, refers to $$\textbf{AtMostOne}([x_1, x_2, \dots, x_n]) \wedge \textbf{AtLeastOne}([x_1, x_2, \dots, x_n])$$
+\end{enumerate}
+It's very important to keep in mind such global constraints since they appear very often in logic problems:
+\begin{enumerate}
+    \item N-Queens. 
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item \textbf{Exactly one} queen on each row and column.
+        \item \textbf{At most one} queen on each diagonal.
+    \end{itemize}
+    \item Sudoku.
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item \textbf{Exactly one} presence of each number in each row, column and $3 \times 3$ grid.
+        \item \textbf{Exactly one} number in each cell.
+    \end{itemize}
+\end{enumerate}
+However, how do we encode such constraints?
+\begin{enumerate}
+    \item $\text{AtLeastOne}([x_1, x_2, \dots, x_n])$ \\ 
+    A simple way for such constraint might be to insert a \textbf{logic or} between every couple of boolean variables, in particular, given the sequence $[x_1, x_2, \dots, x_n]$ we should do:
+    $$x_1 \vee x_2 \vee \dots \vee x_n$$
+    \item $\text{AtMostOne}([x_1, x_2, \dots, x_n])$ \\ 
+    $\text{AtMostOne}(\dots)$ encoding constraint is not easy as before. There exist many feasible possibilities and the way we decide to encode it could affect the efficiency of the SAT solver.
+\end{enumerate}
