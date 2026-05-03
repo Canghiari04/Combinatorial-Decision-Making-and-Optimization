@@ -1,0 +1,20 @@
+The general idea was to introduce $n$ new variables $s_i$ to indicate that the sum has reached $1$ by $i$, with a complexity proportional to $n$. With
+the AtMostK(\dots) constraint something changes, since we introduce an amount of $k * n$ additional variables $s_{i,j}$ to indicate that the sum has
+reached $j$ by $i$. Basically, we use a 2 dimensional matrix in order to keep track which boolean variables have been set to true.
+\[
+    \begin{gathered}
+        (x_1 \to s_{1,1}) \land \bigwedge_{2 \le j \le k} \overline{s_{1,j}} \\ 
+        \bigwedge_{1 < i < n} \bigl[ \ ((x_i \lor s_{i-1,1}) \to s_{i,1}) \land \bigwedge_{2 \le j \le k} (((x_i \land s_{i-1,j-1}) \lor s_{i-1,j}) \to s_{i,j}) \land (s_{i-1,k} \to \overline{x_i}) \ \bigr]  \\ 
+        \land (s_{n-1,k} \to \overline{x_n})
+    \end{gathered}
+\]
+where:
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item $i \rightarrow$ index of boolean variables
+    \item $j \rightarrow$ counter to keep track the variables assigned to true
+    \item $x_i \rightarrow$ boolean variables
+    \item $s_{i,j} \rightarrow$ additional new boolean variables
+\end{itemize}
+Sequential encoding for constraint AtMostK(\dots) is very similar to the previous: its behavior follows the distinction in first position, middle positions and 
+final position. Finally, its complexity is proportional to $n$, in real terms we have $O(kn)$ clauses and $O(kn)$ new variables.

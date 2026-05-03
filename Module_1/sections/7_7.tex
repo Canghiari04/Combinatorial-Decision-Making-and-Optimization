@@ -1,0 +1,7 @@
+As before, we take a set of boolean variables and we state that they cannot be true at the same time. Formally, any combination of $k+1$ variables cannot be
+true at the same time. 
+$$\bigwedge_{\begin{aligned} & M \subseteq \{1, \dots, n\} \\ &  |M| = k+1 \end{aligned}} \bigvee_{i \in M} \neg x_i$$
+We take a combination of $k+1$ variables since we want at most $k$ boolean variables set to true, therefore any combination of $k + 1$ variables cannot be 
+possible.
+
+This generalized approach is even more expensive than the original \textbf{pairwise encoding}, with a complexity up to $O(n^{k+1})$.

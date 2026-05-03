@@ -1,0 +1,27 @@
+There are different properties that we should consider when we are performing a SAT encoding. We have already claimed some of them, as the number of 
+variables and the total cardinality of clauses. However, there is something more that we have to keep in mind while we are doing so, that is 
+\textbf{constraint propagation}. \vspace{7pt}
+
+Let's consider an encoding $E$ of a constraint $C$, such that there is a correspondence between the assignments of the variables in $C$ with boolean
+assignments of the variables in $E$. $E$ is arc-consistent if:
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item Whenever a partial assignment is inconsistent wrt $C$ (cannot be extended to a solution of $C$), unit propagation in $E$ causes conflict.
+    \item Otherwise, unit propagation in $E$ discards arc-inconsistent values.
+\end{itemize}
+\begin{example}
+    e.g. Arc-Consistency with $\text{AtMostOne}([x_1, x_2, \dots, x_n])$ constraint. \vspace{7pt}
+
+    $\text{AtMostOne}([x_1, x_2, \dots, x_n])$ is arc-consistent when:
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item If there are two variables $x_i$ and $x_j$ assigned to $T$ then unit propagation should give a conflict.
+        \item If there is one $x_i$ assigned to $T$ then all the other $x_j$ should be assigned to $F$ by unit propagation.
+    \end{itemize} \vspace{7pt}
+
+    Note: everything must be done by unit propagation, without any additional operation from the SAT solvers.
+\end{example} \vspace{3.5pt}
+
+\textbf{Are the AtMostOne(\dots) encodings we have seen so far arc-consistent encodings?} \\ 
+All of them are arc-consistent except one: \textbf{bitwise encoding}. Now we are gonna to see an example to state the inconsistency of this encoding, considering
+always unit propagation as the main operation.
