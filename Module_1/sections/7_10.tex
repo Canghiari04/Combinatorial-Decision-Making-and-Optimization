@@ -1,1 +1,14 @@
-\dots
+The example that we are gonna to consider is the \textbf{addition between binary numbers} in propositional logic. Formally, an addition in propositional logic
+is:
+\begin{definition}[title = Decision problem]
+    Given $a$ and $b$ represented in binary, find $d$ satisfying $a + b = d$.
+\end{definition} 
+In SAT problems, we must use boolean variables to do so. Therefore, we list the following boolean variables:
+\begin{itemize}
+    \renewcommand{\labelitemi}{-}
+    \item $a_{n-1}, \dots, a_0 \rightarrow$ first binary number
+    \item $b_{n-1}, \dots, b_0 \rightarrow$ second binary number
+    \item $d_{n-1}, \dots, d_0 \rightarrow$ final result from the addition
+    \item $c_{n}, c_{n-1}, \dots, c_0 \rightarrow$ carries defined each time the sum between $a$, $b$ and the previous carry $c_{i-1}$ is greater than 2
+\end{itemize}
+Our goal is to compute each digit $d_i$ of the result from the right to left starting from $c_0 = 0$, so the first carry is set to $0$.

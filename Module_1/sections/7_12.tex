@@ -1,0 +1,24 @@
+Let's see how the \textbf{Full Adder Encoding} discussed previously can be used for the AtMostOne(\dots) constraint.
+\begin{enumerate}
+    \item $\text{AtMostOne}([x_1, x_2])$ using one Full Adder.
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item $a_0$ and $b_0$ take values of $x_1$ and $x_2$.
+        \item Carries should be both set to $0$, $\neg c_0 \wedge \neg c_1$
+    \end{itemize}
+    \item $\text{AtMostOne}([x_1, x_2, x_3])$ using one Full Adder.
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item $a_0$, $b_0$ and $c_0$ take values of $x_1$, $x_2$ and $x_3$.
+        \item Even in this case the carry $c_1$ should be set to $0$, $\neg c_1$.
+    \end{itemize}
+    \item $\text{AtMostOne}([x_1, x_2, x_3, x_4])$ using two Full Adders.
+    \begin{itemize}
+        \renewcommand{\labelitemi}{-}
+        \item $a_0$, $b_0$, $a_1$, $b_1$ take values of $x_1$, $x_2$, $x_3$ and $x_4$.
+        \item We have to check carries and the sums of the $d_i$ digits. The constraint is defined as follows: 
+        $$\neg c_0 \wedge \neg c_1 \wedge \neg c_2 \wedge (\neg d_0 \vee \neg d_1)$$ 
+        Forcing $\neg c_1$ and $\neg c_2$ we express that the sum should never exceed $0$ or $1$, at the same time the clause $(\neg d_0 \vee 
+        \neg d_1)$ defines that only one bit of the result can be set to $1$.
+    \end{itemize}
+\end{enumerate}

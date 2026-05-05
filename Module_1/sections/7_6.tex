@@ -1,9 +1,11 @@
-So far, we focused on $k = 1$, discarding a general integer value, and also we used only one specific comparison, $\leq$. As we stated, cardinality constraints 
-are particular types of constraints used very often inside the SAT models, their formally definition is:
+So far, we focused on $k = 1$, discarding a general integer value, and also we used only one specific comparison, $\leq$ (less or equal). As we stated, cardinality constraints 
+are particular types of constraints used very often inside the SAT models, their formal definition is:
 $$\sum_{1 \leq i \leq n} x_i \bowtie k$$
 where:
 \begin{itemize}
     \renewcommand{\labelitemi}{-}
+    \item $x_i \rightarrow$ boolean variable
+    \item $k \rightarrow$ fixed integer value
     \item $\bowtie \rightarrow$ comparison, it belongs to the set $\{<, \leq, =, \neq, >, \geq\}$ 
 \end{itemize}
 However, let's take a look to the whole picture considering also other comparisons, in particular:
